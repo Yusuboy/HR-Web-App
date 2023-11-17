@@ -1,7 +1,7 @@
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
-    password VARCHAR(1000) NOT NULL -- Hashed password
+    password NOT NULL -- Hashed password
 
 );
 
