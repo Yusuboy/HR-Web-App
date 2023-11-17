@@ -1,13 +1,36 @@
+<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
 </head>
 <body>
-    <h1>Welcome to the HR-Web-App</h1>
-    <p>This is the start page of our HR-Web-App.</p>
+    <h1>Welcome to HR-Web-App</h1>
+
+    {% if notification %}
+        <div class="notification">
+            {{ notification }}
+        </div>
+    {% endif %}
+
+    <h2>Login</h2>
+    <form method="POST" action="{{ url_for('index') }}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+
+        
+    <h2>Register</h2>
+    <a href="{{ url_for('register_page') }}"><button>Create User</button></a>
+
+
+
+
 </body>
 </html>
+

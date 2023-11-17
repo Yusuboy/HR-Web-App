@@ -1,36 +1,24 @@
 from app import app
 
 from flask import render_template, request, redirect, url_for, flash
-from user import login, new_user
+from user import login
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', title='Home')
+    notification = None
 
-@app.route('/login', methods=['POST'])
-def login_route():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
 
         if login(username, password):
-            flash('Login successful!', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('dashboard'))  # Redirect to the dashboard or another page
         else:
-            flash('Login failed. Check your username and password.', 'danger')
+            notification = 'Login failed. Check your username and password. If you are a new user, please register an account.'
 
-    return render_template('login.html', title='Login')
+    return render_template('index.html', title='HR-Web-APP', notification=notification)
 
-@app.route('/register', methods=['POST'])
-def register_route():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
 
-        if new_user(username, password):
-            flash('Registration successful!', 'success')
-            return redirect(url_for('login_route'))
-        else:
-            flash('Registration failed. Username may already exist or password is too short.', 'danger')
-
+@app.route('/register', methods=['GET'])
+def register_page():
     return render_template('register.html', title='Register')
