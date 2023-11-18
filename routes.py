@@ -2,7 +2,7 @@ from app import app
 
 from flask import render_template, request, redirect, url_for, session
 from user import login, new_user
-from attendance import check_in, get_user_id
+from attendance import check_in, check_out, get_user_id
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -49,11 +49,12 @@ def user_home():
         return redirect(url_for('login'))  # Update 'login' with your actual login route
 
     username = session['username']
-    print(username)
-    #user_id = get_user_id(username)
-    user_id = username
-
+    user_id = get_user_id(username)
+    
     if request.method == 'POST':
-        check_in(user_id)
+        if 'check_out' in request.form:
+            check_out(user_id)
+        elif 'check_in' in request.form:
+            check_in(user_id)
 
     return render_template('home.html', title='User Home', user_id=user_id)

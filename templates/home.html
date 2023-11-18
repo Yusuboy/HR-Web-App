@@ -11,8 +11,14 @@
 
     {% if user_id %}
         <form method="POST" action="{{ url_for('user_home') }}">
-            <button type="submit">Log Attendance</button>
+            <button type="submit" name="check_in">Log Attendance</button>
         </form>
+
+        <form method="post" action="{{ url_for('user_home') }}">
+            <button type="submit" name="check_out">Check Out</button>
+        </form>
+
+
     {% endif %}
 </body>
 </html>
