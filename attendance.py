@@ -19,9 +19,48 @@ def check_out(user_id):
 
 
 
+
+def get_user_attendance_history(user_id):
+    # Fetch the user's attendance records
+    user_attendance = get_user_attendance(user_id)
+
+    # Create a dictionary to store day-wise attendance
+    daywise_attendance = {}
+
+    for record in user_attendance:
+        check_in_time = record.check_in
+        check_out_time = record.check_out
+
+        # Calculate the work duration for each record
+        if check_out_time:
+            work_duration = check_out_time - check_in_time
+        else:
+            work_duration = timedelta(0)  # Incomplete attendance, set to zero for now
+
+        # Extract the day of the week
+        day_of_week = check_in_time.strftime('%A')
+
+        # Update the day-wise attendance dictionary
+        if day_of_week not in daywise_attendance:
+            daywise_attendance[day_of_week] = work_duration
+        else:
+            daywise_attendance[day_of_week] += work_duration
+
+    return daywise_attendance
+
+
+
+
+
 def get_latest_attendance(user_id):
     query = text("SELECT * FROM Attendance WHERE user_id = :user_id ORDER BY check_in DESC LIMIT 1")
     result = db.session.execute(query, {"user_id": user_id}).fetchone()
+    return result
+
+
+def get_user_attendance(user_id):
+    query = text("SELECT * FROM Attendance WHERE user_id = :user_id")
+    result = db.session.execute(query, {"user_id": user_id}).fetchall()
     return result
 
 def get_user_id(username):
@@ -31,3 +70,6 @@ def get_user_id(username):
         return result.id
     else:
         return None
+    
+
+

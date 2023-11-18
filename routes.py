@@ -2,7 +2,7 @@ from app import app
 
 from flask import render_template, request, redirect, url_for, session
 from user import login, new_user
-from attendance import check_in, check_out, get_user_id
+from attendance import check_in, check_out, get_user_id, get_user_attendance_history
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -58,3 +58,20 @@ def user_home():
             check_in(user_id)
 
     return render_template('home.html', title='User Home', user_id=user_id)
+
+
+
+@app.route('/profile')
+def user_profile():
+    # Assuming the user authentication is already done
+    # and the username is available in the session
+
+    if 'username' not in session:
+        # Redirect to the login page or handle unauthorized access
+        return redirect(url_for('index'))  # Update 'index' with your actual login route
+
+    username = session['username']
+    user_id = get_user_id(username)
+    attendance_history = get_user_attendance_history(user_id)
+
+    return render_template('profile.html', title='User Profile', username=username, attendance_history=attendance_history)
