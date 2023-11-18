@@ -1,7 +1,9 @@
 from app import app
 
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 from user import login, new_user
+from attendance import check_in, get_user_id
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -12,7 +14,7 @@ def index():
         password = request.form.get('password')
 
         if login(username, password):
-            return redirect(url_for('dashboard'))  # Redirect to the dashboard or another page
+            return redirect(url_for('user_home'))  # Redirect to the dashboard or another page
         else:
             notification = 'Login failed. Check your username and password. If you are a new user, please register an account.'
 
@@ -34,3 +36,24 @@ def register():
             registration_status = 'Registration failed. Please choose a different username or provide a longer password.'
 
     return render_template('register.html', title='Register', registration_status=registration_status)
+
+
+
+@app.route('/user_home', methods=['GET', 'POST'])
+def user_home():
+    # Assuming the user authentication is already done
+    # and the username is available in the session
+
+    if 'username' not in session:
+        # Redirect to the login page or handle unauthorized access
+        return redirect(url_for('login'))  # Update 'login' with your actual login route
+
+    username = session['username']
+    print(username)
+    #user_id = get_user_id(username)
+    user_id = username
+
+    if request.method == 'POST':
+        check_in(user_id)
+
+    return render_template('home.html', title='User Home', user_id=user_id)

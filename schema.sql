@@ -10,8 +10,7 @@ CREATE TABLE Attendance (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     check_in TIMESTAMP NOT NULL,
-    check_out TIMESTAMP,
-    date DATE NOT NULL
+    check_out TIMESTAMP
 );
 
 -- Define the 'leave_requests' table to manage employee leave requests
