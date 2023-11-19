@@ -32,3 +32,27 @@ Uuden käyttäjän rekisteröitymisen jälkeen käyttäjä ohjataan takaisin alo
 
 - Takaisin-painike käyttäjäprofiilisivulla:
 Käyttäjä voi palata takaisin kotisivulle käyttäjäprofiilisivulla.
+
+
+## Testaaminen tuotannossa
+
+1. Clone the repository to your device and go to the root directory.
+```
+git clone git@github.com:Yusuboy/HR-Web-App.git
+```
+2. Activate the virtual environment and install the requirements in root directory.
+```
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+```
+
+3. Set the database schema. Note that you will need to have psql database running
+```
+psql < schema.sql
+```
+
+4.  Run the application using the command:
+```
+flask run
+```
