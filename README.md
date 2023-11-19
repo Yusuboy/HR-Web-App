@@ -8,7 +8,8 @@ HR-Web-App on sovellus, joka tarjoaa tehokkaan ja käyttäjäystävällisen tava
 - Lomien hallinta: Työntekijät voivat pyytää lomia, ja esimiehet voivat tehokkaasti hyväksyä tai hylätä pyynnöt, mikä auttaa ylläpitämään tasapainoista henkilöstöä.
 
 ## Valmiina
-- Käyttäjän kirjautuminen:
+
+-Käyttäjän kirjautuminen:
 Käyttäjä voi kirjautua sisään aloitussivulla antamalla käyttäjätunnuksensa ja salasanansa.
 
 -Uuden käyttäjän rekisteröityminen:
