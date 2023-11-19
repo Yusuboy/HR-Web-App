@@ -17,7 +17,11 @@
         <form method="post" action="{{ url_for('user_home') }}">
             <button type="submit" name="check_out">Check Out</button>
         </form>
-
+        <form method="post">
+            <!-- Other form elements go here -->
+    
+            <button type="submit" name="logout">Log Out</button>
+        </form>
     <!-- index.html and other templates -->
 
     <a href="{{ url_for('user_profile') }}">View Profile</a>

@@ -2,6 +2,8 @@
 from db import db
 from sqlalchemy import text
 from datetime import datetime
+from datetime import timedelta
+
 
 def check_in(user_id):
     if user_id is not None:

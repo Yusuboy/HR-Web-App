@@ -56,6 +56,10 @@ def user_home():
             check_out(user_id)
         elif 'check_in' in request.form:
             check_in(user_id)
+        elif 'logout' in request.form:
+            # Clear the session data and redirect to the login page
+            session.clear()
+            return redirect(url_for('index'))  # Update 'login' with your actual login route
 
     return render_template('home.html', title='User Home', user_id=user_id)
 
