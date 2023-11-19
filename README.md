@@ -7,28 +7,28 @@ HR-Web-App on sovellus, joka tarjoaa tehokkaan ja käyttäjäystävällisen tava
 - Admin/HR Läsnäolo seuranta: Seuraa työntekijöiden työaikoja, läsnäoloa ja taukoja, mikä helpottaa aikataulujen seurantaa ja hallintaa.
 - Lomien hallinta: Työntekijät voivat pyytää lomia, ja esimiehet voivat tehokkaasti hyväksyä tai hylätä pyynnöt, mikä auttaa ylläpitämään tasapainoista henkilöstöä.
 
-- Valmiina
+## Valmiina
 
--Käyttäjän kirjautuminen:
+- Käyttäjän kirjautuminen:
 Käyttäjä voi kirjautua sisään aloitussivulla antamalla käyttäjätunnuksensa ja salasanansa.
 
--Uuden käyttäjän rekisteröityminen:
+- Uuden käyttäjän rekisteröityminen:
 Käyttäjä voi luoda uuden tilin rekisteröitymissivulla antamalla käyttäjätunnuksensa ja salasanansa.
 
--Työajanseuranta:
+- Työajanseuranta:
 käyttäjä voi kykenee sisään- ja ulosleimaukseen.
 
--Käyttäjän kotisivu:
+- Käyttäjän kotisivu:
 Näytetään käyttäjän kotisivulla tietoja ja mahdollisuus kirjautua sisään ja ulos.
 
--Käyttäjäprofiilisivu:
+- Käyttäjäprofiilisivu:
 Käyttäjä voi tarkastella työajanhistoriaansa päivämäärän ja keston mukaan.
 
--Uloskirjautuminen:
+- Uloskirjautuminen:
 Käyttäjä voi kirjautua ulos käyttäjän kotisivulla.
 
--Ohjaus rekisteröitymisen jälkeen:
+- Ohjaus rekisteröitymisen jälkeen:
 Uuden käyttäjän rekisteröitymisen jälkeen käyttäjä ohjataan takaisin aloitussivulle.
 
--Takaisin-painike käyttäjäprofiilisivulla:
+- Takaisin-painike käyttäjäprofiilisivulla:
 Käyttäjä voi palata takaisin kotisivulle käyttäjäprofiilisivulla.
