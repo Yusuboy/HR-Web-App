@@ -9,11 +9,10 @@ HR-Web-App on sovellus, joka tarjoaa tehokkaan ja käyttäjäystävällisen tava
 
 ## Valmiina
 - Käyttäjän kirjautuminen:
+Käyttäjä voi kirjautua sisään aloitussivulla antamalla käyttäjätunnuksensa ja salasanansa.
 
-- Käyttäjä voi kirjautua sisään aloitussivulla antamalla käyttäjätunnuksensa ja salasanansa.
-Uuden käyttäjän rekisteröityminen:
-
--Käyttäjä voi luoda uuden tilin rekisteröitymissivulla antamalla käyttäjätunnuksensa ja salasanansa.
+-Uuden käyttäjän rekisteröityminen:
+Käyttäjä voi luoda uuden tilin rekisteröitymissivulla antamalla käyttäjätunnuksensa ja salasanansa.
 
 -Työajanseuranta:
 käyttäjä voi kykenee sisään- ja ulosleimaukseen.
