@@ -31,7 +31,7 @@ def register():
 
         if new_user(new_username, new_password):
             registration_status = 'Registration successful! You can now log in.'
-            # Optionally, you might want to redirect the user to the login page here
+            return redirect(url_for('index')) # Optionally, you might want to redirect the user to the login page here
         else:
             registration_status = 'Registration failed. Please choose a different username or provide a longer password.'
 
