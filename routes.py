@@ -31,7 +31,7 @@ def register():
 
         if new_user(new_username, new_password):
             registration_status = 'Registration successful! You can now log in.'
-            return redirect(url_for('index')) # Optionally, you might want to redirect the user to the login page here
+            return redirect(url_for('index')) 
         else:
             registration_status = 'Registration failed. Please choose a different username or provide a longer password.'
 
@@ -41,12 +41,11 @@ def register():
 
 @app.route('/user_home', methods=['GET', 'POST'])
 def user_home():
-    # Assuming the user authentication is already done
-    # and the username is available in the session
+
 
     if 'username' not in session:
         # Redirect to the login page or handle unauthorized access
-        return redirect(url_for('login'))  # Update 'login' with your actual login route
+        return redirect(url_for('login')) 
 
     username = session['username']
     user_id = get_user_id(username)
@@ -59,7 +58,7 @@ def user_home():
         elif 'logout' in request.form:
             # Clear the session data and redirect to the login page
             session.clear()
-            return redirect(url_for('index'))  # Update 'login' with your actual login route
+            return redirect(url_for('index'))  
 
     return render_template('home.html', title='User Home', user_id=user_id)
 
@@ -72,7 +71,7 @@ def user_profile():
 
     if 'username' not in session:
         # Redirect to the login page or handle unauthorized access
-        return redirect(url_for('index'))  # Update 'index' with your actual login route
+        return redirect(url_for('index')) 
 
     username = session['username']
     user_id = get_user_id(username)
