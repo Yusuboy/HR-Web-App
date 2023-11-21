@@ -40,19 +40,27 @@ Käyttäjä voi palata takaisin kotisivulle käyttäjäprofiilisivulla.
 ```
 git clone git@github.com:Yusuboy/HR-Web-App.git
 ```
-2. Activate the virtual environment and install the requirements in root directory.
+
+2. Create .env-file to project root with following contents
+(your_db_name and your_secret_key can be chosen freely at this point):
+```
+DATABASE_URL="postgresql:///your_db_name"
+>SECRET_KEY="your_secret_key"
+```
+
+3. Activate the virtual environment and install the requirements in root directory.
 ```
 $ python3 -m venv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-3. Set the database schema. Note that you will need to have psql database running
+4. Set the database schema. Note that you will need to have psql database running
 ```
 psql < schema.sql
 ```
 
-4.  Run the application using the command:
+5.  Run the application using the command:
 ```
 flask run
 ```
