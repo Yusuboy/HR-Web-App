@@ -3,17 +3,19 @@
 <table>
     <thead>
         <tr>
+            <th>Date</th>
             <th>Day</th>
             <th>Total Hours</th>
             <th>Total Minutes</th>
         </tr>
     </thead>
     <tbody>
-        {% for day, duration in attendance_history.items() %}
+        {% for record in attendance_history %}
             <tr>
-                <td>{{ day }}</td>
-                <td>{{ duration.seconds // 3600 }}</td>
-                <td>{{ (duration.seconds // 60) % 60 }}</td>
+                <td>{{ record.date }}</td>
+                <td>{{ record.day_of_week }}</td>
+                <td>{{ record.work_duration.seconds // 3600 }}</td>
+                <td>{{ (record.work_duration.seconds // 60) % 60 }}</td>
             </tr>
         {% endfor %}
     </tbody>
