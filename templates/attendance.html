@@ -1,0 +1,27 @@
+<form method="post" action="{{ url_for('attendance') }}">
+    <!-- Dropdown for Työaika -->
+    <label for="tyoaika">Työaika:</label>
+    <select id="tyoaika" name="tyoaika">
+        <option value="päivätyö">Päivätyö</option>
+        <option value="iltavuoro">Iltavuoro</option>
+        <option value="pyhäpäivät">Pyhäpäivät</option>
+    </select>
+
+    <br>
+
+    <!-- Dropdown for Tuntilaji -->
+    <label for="tuntilaji">Tuntilaji:</label>
+    <select id="tuntilaji" name="tuntilaji">
+        <option value="työaika">Työaika</option>
+        <option value="matka-aika">Matka-aika</option>
+        <option value="kokous">Kokous</option>
+    </select>
+
+    <br>
+
+    <!-- Add other input fields if needed -->
+
+    <input type="submit" value="Leimaa sisään">
+</form>
+
+<a href="{{ url_for('user_home') }}">Palaa takaisin</a>

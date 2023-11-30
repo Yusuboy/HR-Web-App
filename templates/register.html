@@ -5,17 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - HR-Web-App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .notification {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Register for HR-Web-App</h1>
+
+    {% if registration_status %}
+        <div class="notification">
+            {{ registration_status }}
+        </div>
+    {% endif %}
+
+    
+    <h1>Rekisteröinti</h1>
 
     <form method="POST" action="{{ url_for('register') }}">
-        <label for="new_username">New Username:</label>
+        <label for="new_username">Uusi käyttäjätunnus:</label>
         <input type="text" id="new_username" name="new_username" required>
-        <label for="new_password">New Password:</label>
+        <label for="new_password">Uusi salasana:</label>
         <input type="password" id="new_password" name="new_password" required>
-        <button type="submit">Register</button>
-        <a href="{{ url_for('index') }}">Go Back</a>
+        <button type="submit">Luo tunnus</button>
+        <a href="{{ url_for('index') }}">Palaa takaisin</a>
     </form>
 </body>
 </html>

@@ -5,6 +5,8 @@ from user import login, new_user
 from attendance import check_in, check_out, get_user_id, get_user_attendance_history
 
 
+# ...
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     notification = None
@@ -13,10 +15,10 @@ def index():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        if login(username, password):
-            return redirect(url_for('user_home'))  # Redirect to the dashboard or another page
-        else:
-            notification = 'Login failed. Check your username and password. If you are a new user, please register an account.'
+        notification = login(username, password)
+
+        if "successful" in notification:
+            return redirect(url_for('user_home'))
 
     return render_template('index.html', title='HR-Web-APP', notification=notification)
 
@@ -29,11 +31,10 @@ def register():
         new_username = request.form.get('new_username')
         new_password = request.form.get('new_password')
 
-        if new_user(new_username, new_password):
-            registration_status = 'Registration successful! You can now log in.'
-            return redirect(url_for('index')) 
-        else:
-            registration_status = 'Registration failed. Please choose a different username or provide a longer password.'
+        registration_status = new_user(new_username, new_password)
+
+        if "successful" in registration_status:
+            return redirect(url_for('index'))
 
     return render_template('register.html', title='Register', registration_status=registration_status)
 
@@ -53,8 +54,6 @@ def user_home():
     if request.method == 'POST':
         if 'check_out' in request.form:
             check_out(user_id)
-        elif 'check_in' in request.form:
-            check_in(user_id)
         elif 'logout' in request.form:
             # Clear the session data and redirect to the login page
             session.clear()
@@ -62,6 +61,37 @@ def user_home():
 
     return render_template('home.html', title='User Home', user_id=user_id)
 
+# Create a new route for attendance
+@app.route('/attendance', methods=['GET', 'POST'])
+def attendance():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    username = session['username']
+    user_id = get_user_id(username)
+    if request.method == 'POST':
+        tyoaika = request.form.get('tyoaika')
+        tuntilaji = request.form.get('tuntilaji')
+        check_in(user_id, tyoaika, tuntilaji)
+
+    return render_template('attendance.html', title='Attendance', user_id=user_id)
+
+
+
+
+@app.route('/checkout_reason', methods=['GET', 'POST'])
+def checkout_reason():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    username = session['username']
+    user_id = get_user_id(username)
+    if request.method == 'POST':
+        checkout_reason = request.form.get('checkout_reason')
+        check_out(user_id, checkout_reason)
+
+
+    return render_template('checkout_reason.html', title='Checkout Reason',user_id=user_id)
 
 
 @app.route('/profile')

@@ -3,39 +3,44 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask import session
 from db import db
 
-def login(username1, password1):
-    if len(username1) == 0 or len(password1) == 0:
-        return False
 
-    query = text("SELECT * FROM Users WHERE username=:username1")
-    right_user = db.session.execute(query, {"username1": username1})
-    number = right_user.fetchone()
 
-    if number is None:
-        return False
+def login(username, password):
+    if len(username) == 0 or len(password) == 0:
+        return "Username and password are required."
 
-    if len(number) != 0:
-        hash_value = number.password
-        if check_password_hash(hash_value, password1):
-            session["username"] = username1
-            return True
+    query = text("SELECT * FROM Users WHERE username=:username")
+    user = db.session.execute(query, {"username": username}).first()
 
-    return False
+    if user is None:
+        return "Login failed. Check your username and password."
+
+    hash_value = user.password
+    if check_password_hash(hash_value, password):
+        session["username"] = username
+        return "Login successful!"
+    else:
+        return "Login failed. Check your username and password."
 
 def new_user(username, password):
     if len(password) < 5:
-        return False
+        return "Registration failed. Please choose a password with at least 5 characters."
 
-    query = text("SELECT * FROM Users WHERE username=:username1")
-    right_user = db.session.execute(query, {"username1": username})
-    number = right_user.fetchall()
 
-    if len(number) > 0:
-        return False
+    query = text("SELECT * FROM Users WHERE username=:username")
+    existing_user = db.session.execute(query, {"username": username}).first()
+
+    if existing_user:
+        return "Registration failed. Username already exists. Please choose a different username."
 
     hash_value = generate_password_hash(password)
     query = text("INSERT INTO Users (username, password) VALUES (:username, :password)")
-    right_user = db.session.execute(query, {"username": username, "password": hash_value})
-    db.session.commit()
-
-    return True
+    
+    try:
+        db.session.execute(query, {"username": username, "password": hash_value})
+        db.session.commit()
+        return "Registration successful! You can now log in."
+    except Exception as e:
+        print(f"Error creating new user: {e}")
+        db.session.rollback()
+        return "Registration failed. An error occurred while creating your account."

@@ -1,0 +1,28 @@
+<!-- templates/checkout_reason.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Reason - HR-Web-App</title>
+</head>
+<body>
+    <h1>Choose Checkout Reason</h1>
+
+    <form method="post" action="{{ url_for('checkout_reason') }}">
+        <label for="checkout_reason">Select a reason:</label>
+        <select id="checkout_reason" name="checkout_reason">
+            <option value="break">Checkout</option>
+            <option value="check_out">For a Break</option>
+            <option value="coffee">For a Coffee Break</option>
+            <option value="other">Other</option>
+        </select>
+
+        <!-- Add other input fields if needed -->
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <a href="{{ url_for('user_home') }}">Palaa takaisin</a>
+</body>
+</html>
