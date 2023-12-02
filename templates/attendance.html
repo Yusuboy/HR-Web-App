@@ -1,3 +1,36 @@
+<!-- Assuming this is in the same template where you applied the previous styles -->
+<style>
+    /* Styles for form elements */
+    form {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    select, input[type="submit"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+
+    }
+
+    button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    /* Add other styles as needed */
+</style>
+
 <form method="post" action="{{ url_for('attendance') }}">
     <!-- Dropdown for Työaika -->
     <label for="tyoaika">Työaika:</label>

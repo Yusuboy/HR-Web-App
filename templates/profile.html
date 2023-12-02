@@ -1,3 +1,39 @@
+<!-- Assuming this is in the same template where you applied the previous styles -->
+<style>
+    h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        margin-left: 10px;
+        display: inline-block;
+        margin-top: 10px;
+    }
+</style>
+
 <h2>{{ username }}'s Profile</h2>
 
 <table>
@@ -5,7 +41,7 @@
         <tr>
             <th>Päivämäärä</th>
             <th>Päivä</th>
-            <th>tunnit</th>
+            <th>Tunnit</th>
             <th>Minuutit</th>
         </tr>
     </thead>
