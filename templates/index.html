@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <h1>Työaikasovellus</h1>
+    <h1>Work Clock Application</h1>
 
     {% if notification %}
         <div class="notification">
@@ -59,16 +59,16 @@
         </div>
     {% endif %}
 
-    <h2>Kirjaudu sisään</h2>
+    <h2>Log in to your account</h2>
     <form method="POST" action="{{ url_for('index') }}">
-        <label for="username">Käyttäjätunnus:</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
-        <label for="password">Salasana:</label>
+        <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
-        <button type="submit">Kirjaudu sisään</button>
+        <button type="submit">Sign in</button>
     </form>
 
-    <h2>Jos sinulla ei ole käyttäjätunnusta</h2>
-    <a href="{{ url_for('register') }}">Rekisteröidy</a>
+    <h2>If you do not have a user ID</h2>
+    <a href="{{ url_for('register') }}">Register at</a>
 </body>
 </html>
