@@ -22,11 +22,33 @@
         color: #333;
     }
 
-    select, input[type="submit"] {
+    input[type="submit"],
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    select {
         width: 100%;
         padding: 8px;
         margin-bottom: 10px;
         box-sizing: border-box;
+
+    }
+
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        display: block;
+        margin-top: 10px;
     }
 
     /* Add other styles as needed */
@@ -56,6 +78,6 @@
         <input type="submit" value="Submit">
     </form>
 
-    <a href="{{ url_for('user_home') }}">Palaa takaisin</a>
+    <a href="{{ url_for('user_home') }}">Go back</a>
 </body>
 </html>

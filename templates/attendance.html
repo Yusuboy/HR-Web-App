@@ -12,7 +12,21 @@
         color: #333;
     }
 
-    select, input[type="submit"] {
+
+    input[type="submit"],
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    select {
         width: 100%;
         padding: 8px;
         margin-bottom: 10px;
@@ -20,24 +34,27 @@
 
     }
 
-    button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    a {
+        color: #007bff;
+        text-decoration: none;
+        display: block;
+        margin-top: 10px;
+    }
+
+
+
+
+
     /* Add other styles as needed */
 </style>
 
 <form method="post" action="{{ url_for('attendance') }}">
     <!-- Dropdown for Työaika -->
-    <label for="tyoaika">Työaika:</label>
+    <label for="tyoaika">Working time:</label>
     <select id="tyoaika" name="tyoaika">
-        <option value="päivätyö">Päivätyö</option>
-        <option value="iltavuoro">Iltavuoro</option>
-        <option value="pyhäpäivät">Pyhäpäivät</option>
+        <option value="päivätyö">Day job</option>
+        <option value="iltavuoro">Evening shift</option>
+        <option value="pyhäpäivät">Holidays</option>
     </select>
 
     <br>
@@ -45,16 +62,16 @@
     <!-- Dropdown for Tuntilaji -->
     <label for="tuntilaji">Tuntilaji:</label>
     <select id="tuntilaji" name="tuntilaji">
-        <option value="työaika">Työaika</option>
-        <option value="matka-aika">Matka-aika</option>
-        <option value="kokous">Kokous</option>
+        <option value="työaika">working hours</option>
+        <option value="matka-aika">Travel time</option>
+        <option value="kokous">Meeting</option>
     </select>
 
     <br>
 
     <!-- Add other input fields if needed -->
 
-    <input type="submit" value="Leimaa sisään">
+    <input type="submit" value="Stamp in">
 </form>
 
-<a href="{{ url_for('user_home') }}">Palaa takaisin</a>
+<a href="{{ url_for('user_home') }}">Go back</a>

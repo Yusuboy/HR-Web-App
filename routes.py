@@ -3,6 +3,7 @@ from app import app
 from flask import render_template, request, redirect, url_for, session
 from user import login, new_user
 from attendance import check_in, check_out, get_user_id, get_user_attendance_history
+from leave import create_leave_request
 
 
 # ...
@@ -108,3 +109,25 @@ def user_profile():
     attendance_history = get_user_attendance_history(user_id)
 
     return render_template('profile.html', title='User Profile', username=username, attendance_history=attendance_history)
+
+
+
+@app.route('/leave_request', methods=['GET', 'POST'])
+def leave_request():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
+    username = session['username']
+    user_id = get_user_id(username)
+
+    if request.method == 'POST':
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        reason = request.form.get('reason')
+        
+        username = session['username']
+        user_id = get_user_id(username)
+
+        create_leave_request(user_id, start_date, end_date, reason)
+
+    return render_template('leave_request.html', title='Leave Request')

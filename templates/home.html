@@ -53,19 +53,23 @@
 
     {% if user_id %}
         <form method="get" action="{{ url_for('attendance') }}">
-            <button type="submit">Leimaa sisään</button>
+            <button type="submit">Stamp in</button>
         </form>
 
         <form method="get" action="{{ url_for('checkout_reason') }}">
-            <button>Leimaa ulos</button>
-        </form>
-        
-        <form method="post" action="{{ url_for('user_home') }}">
-            <button type="submit" name="logout">Kirjaudu ulos</button>
+            <button>Stamp out</button>
         </form>
 
         <form method="get" action="{{ url_for('user_profile') }}">
-            <button type="submit">Työaikakalenteri</button>
+            <button type="submit">Working time calendar</button>
+        </form>
+
+        <form method="get" action = "{{ url_for('leave_request') }}">
+            <button type="submit">Leave request</button>
+        </form>
+
+        <form method="post" action="{{ url_for('user_home') }}">
+            <button type="submit" name="logout">Sign out</button>
         </form>
     {% endif %}
 </body>

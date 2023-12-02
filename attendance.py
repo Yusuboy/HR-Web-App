@@ -39,6 +39,8 @@ def get_user_attendance_history(user_id):
         attendance_history.append({
             'date': check_in_time.strftime('%Y-%m-%d'),
             'day_of_week': check_in_time.strftime('%A'),
+            'check_in_time': check_in_time.strftime('%H:%M'),  # Format the time as hour:minute
+            'check_out_time': check_out_time.strftime('%H:%M') if check_out_time else None,
             'work_duration': work_duration
         })
 

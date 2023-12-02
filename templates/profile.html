@@ -43,6 +43,8 @@
             <th>Päivä</th>
             <th>Tunnit</th>
             <th>Minuutit</th>
+            <th>Sisäänkirjautuminen</th>
+            <th>Uloskirjautuminen</th>
         </tr>
     </thead>
     <tbody>
@@ -52,8 +54,10 @@
                 <td>{{ record.day_of_week }}</td>
                 <td>{{ record.work_duration.seconds // 3600 }}</td>
                 <td>{{ (record.work_duration.seconds // 60) % 60 }}</td>
+                <td>{{ record.check_in_time }}</td>
+                <td>{{ record.check_out_time }}</td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
-<a href="{{ url_for('user_home') }}">Palaa takaisin</a>
+<a href="{{ url_for('user_home') }}">Go back</a>
