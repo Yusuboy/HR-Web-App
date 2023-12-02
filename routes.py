@@ -2,11 +2,8 @@ from app import app
 
 from flask import render_template, request, redirect, url_for, session
 from user import login, new_user
-from attendance import check_in, check_out, get_user_id, get_user_attendance_history
+from attendance import check_in, check_out, get_user_id, get_user_attendance_history, get_latest_attendance
 from leave import create_leave_request
-
-
-# ...
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -43,8 +40,6 @@ def register():
 
 @app.route('/user_home', methods=['GET', 'POST'])
 def user_home():
-
-
     if 'username' not in session:
         # Redirect to the login page or handle unauthorized access
         return redirect(url_for('login')) 
@@ -74,11 +69,9 @@ def attendance():
         tyoaika = request.form.get('tyoaika')
         tuntilaji = request.form.get('tuntilaji')
         check_in(user_id, tyoaika, tuntilaji)
-
+        return redirect(url_for('checkin_confirmation'))
+    
     return render_template('attendance.html', title='Attendance', user_id=user_id)
-
-
-
 
 @app.route('/checkout_reason', methods=['GET', 'POST'])
 def checkout_reason():
@@ -90,6 +83,7 @@ def checkout_reason():
     if request.method == 'POST':
         checkout_reason = request.form.get('checkout_reason')
         check_out(user_id, checkout_reason)
+        return redirect(url_for('user_home'))
 
 
     return render_template('checkout_reason.html', title='Checkout Reason',user_id=user_id)
@@ -108,9 +102,9 @@ def user_profile():
     user_id = get_user_id(username)
     attendance_history = get_user_attendance_history(user_id)
 
+    print(attendance_history)
+
     return render_template('profile.html', title='User Profile', username=username, attendance_history=attendance_history)
-
-
 
 @app.route('/leave_request', methods=['GET', 'POST'])
 def leave_request():
@@ -131,3 +125,16 @@ def leave_request():
         create_leave_request(user_id, start_date, end_date, reason)
 
     return render_template('leave_request.html', title='Leave Request')
+
+
+@app.route('/checkin_confirmation')
+def checkin_confirmation():
+    if 'username' not in session:
+        # Redirect to the login page or handle unauthorized access
+        return redirect(url_for('index')) 
+    username = session['username']
+    user_id = get_user_id(username)
+
+    attendance = get_latest_attendance(user_id)
+    print(attendance)
+    return render_template('checkin_confirmation.html', attendance=attendance)

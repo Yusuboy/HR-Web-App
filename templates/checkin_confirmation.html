@@ -1,0 +1,43 @@
+<!-- Assuming this is in the same template where you applied the previous styles -->
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-in Confirmation - HR-Web-App</title>
+</head>
+<body>
+    <h1>Stamped in at {{ attendance.check_in.strftime('%H:%M') }}</h1>
+
+    <form method="post" action="{{ url_for('user_home') }}">
+        <button type="submit">Back to User Home</button>
+    </form>
+
+    <form method="get" action="{{ url_for('checkout_reason') }}">
+        <button type="submit">Stamp out</button>
+    </form>
+</body>
+</html>
