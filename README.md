@@ -9,30 +9,29 @@ HR-Web-App on sovellus, joka tarjoaa tehokkaan ja käyttäjäystävällisen tava
 
 ## Valmiina
 
-- Käyttäjän kirjautuminen:
+- Käyttäjän kirjautuminen (User Login):
 Käyttäjä voi kirjautua sisään aloitussivulla antamalla käyttäjätunnuksensa ja salasanansa.
 
-- Uuden käyttäjän rekisteröityminen:
+- Uuden käyttäjän rekisteröityminen (User Registration):
 Käyttäjä voi luoda uuden tilin rekisteröitymissivulla antamalla käyttäjätunnuksensa ja salasanansa.
+- Työajanseuranta (Time Tracking):
+Käyttäjä voi leimata sisään ja ulos.
+Käyttäjä voi lisätä syyn ulosleimauksen ja sisäänleimauksen yhteydessä.
 
-- Työajanseuranta:
-käyttäjä voi kykenee sisään- ja ulosleimaukseen.
+- Käyttäjän kotisivu (User Home Page):
+Näytetään käyttäjän kotisivulla tietoja ja mahdollisuus kirjautua sisään, ulos, leimata työaikaa, tehdä lomahakemus ja lisätä syyn leimauksen yhteydessä.
 
-- Käyttäjän kotisivu:
-Näytetään käyttäjän kotisivulla tietoja ja mahdollisuus kirjautua sisään ja ulos.
+- Käyttäjäprofiilisivu (User Profile Page):
+Käyttäjä voi tarkastella työajanhistoriaansa päivämäärän, keston, sisään- ja ulosleimausten aikojen sekä leimauksiin liitettyjen syiden mukaan.
 
-- Käyttäjäprofiilisivu:
-Käyttäjä voi tarkastella työajanhistoriaansa päivämäärän ja keston mukaan.
-
-- Uloskirjautuminen:
+- Uloskirjautuminen (Logout):
 Käyttäjä voi kirjautua ulos käyttäjän kotisivulla.
 
-- Ohjaus rekisteröitymisen jälkeen:
-Uuden käyttäjän rekisteröitymisen jälkeen käyttäjä ohjataan takaisin aloitussivulle.
+- Lomahakemus (Leave Request):
+Käyttäjä voi tehdä lomahakemuksen, ja tämä näkyy käyttäjäprofiilisivulla.
 
-- Takaisin-painike käyttäjäprofiilisivulla:
-Käyttäjä voi palata takaisin kotisivulle käyttäjäprofiilisivulla.
-
+- Navigointi (Navigation):
+käyttäjä voi hinosti navigoida eri sivustojen välillä.
 
 ## Testaaminen tuotannossa
 
