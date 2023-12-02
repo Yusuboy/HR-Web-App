@@ -33,6 +33,13 @@ Käyttäjä voi tehdä lomahakemuksen, ja tämä näkyy käyttäjäprofiilisivul
 - Navigointi (Navigation):
 käyttäjä voi hinosti navigoida eri sivustojen välillä.
 
+
+## Vielä tehtävänä
+
+- Admin tili, joka hallinnoi työntekijöitä.
+- Palkkalaskenta
+
+
 ## Testaaminen tuotannossa
 
 1. Clone the repository to your device and go to the root directory.
