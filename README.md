@@ -33,11 +33,13 @@ Käyttäjä voi tehdä lomahakemuksen, ja tämä näkyy käyttäjäprofiilisivul
 - Navigointi (Navigation):
 käyttäjä voi hinosti navigoida eri sivustojen välillä.
 
+- Palkka (Salary)
+Jokaisella työntekijällä on 12/e tuntipalkka. Tällä hetkelle 12/e minuuttipalkka, mutta muutetaan myohemmin.
 
 ## Vielä tehtävänä
 
 - Admin tili, joka hallinnoi työntekijöitä.
-- Palkkalaskenta
+Tarkoituksena olisi, että olisi yksi Adimin/HR tili, joka kykene tarkastelemaan työntekijöiden työhistoriaa sekä vastata lomahakemuskiin hyväkymällä tai hylkäämällä. Tämä on yhä työn alla.
 
 
 ## Testaaminen tuotannossa
