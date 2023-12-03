@@ -123,6 +123,7 @@ def leave_request():
         user_id = get_user_id(username)
 
         create_leave_request(user_id, start_date, end_date, reason)
+        return redirect(url_for('user_home'))
 
     return render_template('leave_request.html', title='Leave Request')
 
