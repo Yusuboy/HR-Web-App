@@ -59,15 +59,15 @@
     {% endif %}
 
     
-    <h1>Rekisteröinti</h1>
+    <h1>Registration</h1>
 
     <form method="POST" action="{{ url_for('register') }}">
-        <label for="new_username">Uusi käyttäjätunnus:</label>
+        <label for="new_username">New username:</label>
         <input type="text" id="new_username" name="new_username" required>
-        <label for="new_password">Uusi salasana:</label>
+        <label for="new_password">New password:</label>
         <input type="password" id="new_password" name="new_password" required>
-        <button type="submit">Luo tunnus</button>
-        <a href="{{ url_for('index') }}">Palaa takaisin</a>
+        <button type="submit">Register</button>
+        <a href="{{ url_for('index') }}">Go back</a>
     </form>
 </body>
 </html>

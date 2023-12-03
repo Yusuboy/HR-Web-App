@@ -102,7 +102,7 @@ def user_profile():
     user_id = get_user_id(username)
     attendance_history = get_user_attendance_history(user_id)
 
-    print(attendance_history)
+    # print(attendance_history)
 
     return render_template('profile.html', title='User Profile', username=username, attendance_history=attendance_history)
 
@@ -136,5 +136,5 @@ def checkin_confirmation():
     user_id = get_user_id(username)
 
     attendance = get_latest_attendance(user_id)
-    print(attendance)
+    # print(attendance)
     return render_template('checkin_confirmation.html', attendance=attendance)

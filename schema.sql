@@ -30,8 +30,11 @@ CREATE TABLE Leave_requests (
 CREATE TABLE Salaries (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
-    month DATE NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL
+    start_date DATE NOT NULL,
+    end_date DATE,
+    hourly_rate DECIMAL(10, 2) NOT NULL,
+    total_earnings DECIMAL(10, 2),
+    CONSTRAINT user_id_end_date_unique UNIQUE (user_id, end_date)
 );
 
 -- Define the 'documents' table to store employee documents

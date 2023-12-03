@@ -3,7 +3,7 @@ from db import db
 from sqlalchemy import text
 from datetime import datetime
 from datetime import timedelta
-
+from salary import calculate_total_earnings, update_salary_record
 
 def check_in(user_id, tyoaika, tuntilaji):
     if user_id is not None:
@@ -19,7 +19,21 @@ def check_out(user_id, checkout_reason):
             db.session.execute(query, {"check_out": datetime.now(), "checkout_reason": checkout_reason, "attendance_id": latest_attendance.id})
             db.session.commit()
 
+            start_date = latest_attendance.check_in.date()
+            start_time = latest_attendance.check_in.time()
+            end_date = latest_attendance.check_out.date() if latest_attendance.check_out else datetime.now().date()
+            end_time = latest_attendance.check_out.time() if latest_attendance.check_out else datetime.now().time()
+   
+            hourly_rate = 12.00
 
+            total_earnings = calculate_total_earnings(start_time, end_time, hourly_rate)
+            update_salary_record(user_id, start_date, end_date, hourly_rate, total_earnings)
+
+
+
+def calculate_salary_for_attendance(user_id, start_date, end_date, hourly_rate):
+    total_earnings = calculate_total_earnings(user_id, start_date, end_date)
+    return total_earnings
 
 
 def get_user_attendance_history(user_id):
