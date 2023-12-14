@@ -62,13 +62,19 @@ def get_user_attendance_history(user_id):
 
 
 def get_latest_attendance(user_id):
-    query = text("SELECT * FROM Attendance WHERE user_id = :user_id ORDER BY check_in DESC LIMIT 1")
+    query = text(
+        "SELECT id, user_id, working_time, hour_class, check_in, check_out, checkout_reason "
+        "FROM Attendance WHERE user_id = :user_id ORDER BY check_in DESC LIMIT 1"
+    )
     result = db.session.execute(query, {"user_id": user_id}).fetchone()
     return result
 
 
 def get_user_attendance(user_id):
-    query = text("SELECT * FROM Attendance WHERE user_id = :user_id")
+    query = text(
+        "SELECT id, user_id, working_time, hour_class, check_in, check_out, checkout_reason "
+        "FROM Attendance WHERE user_id = :user_id"
+    )
     result = db.session.execute(query, {"user_id": user_id}).fetchall()
     return result
 

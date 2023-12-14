@@ -9,7 +9,7 @@ def login(username, password):
     if len(username) == 0 or len(password) == 0:
         return "Username and password are required."
 
-    query = text("SELECT * FROM Users WHERE username=:username")
+    query = text("SELECT id, username, password FROM Users WHERE username=:username")
     user = db.session.execute(query, {"username": username}).first()
 
     if user is None:
@@ -27,7 +27,7 @@ def new_user(username, password):
         return "Registration failed. Please choose a password with at least 5 characters."
 
 
-    query = text("SELECT * FROM Users WHERE username=:username")
+    query = text("SELECT id, username, password FROM Users WHERE username=:username")
     existing_user = db.session.execute(query, {"username": username}).first()
 
     if existing_user:
