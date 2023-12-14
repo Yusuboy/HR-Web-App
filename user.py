@@ -35,7 +35,7 @@ def new_user(username, password):
 
     hash_value = generate_password_hash(password)
     query = text("INSERT INTO Users (username, password) VALUES (:username, :password)")
-    
+ 
     try:
         db.session.execute(query, {"username": username, "password": hash_value})
         db.session.commit()

@@ -1,29 +1,59 @@
-
-from db import db
+from datetime import datetime, timedelta
 from sqlalchemy import text
-from datetime import datetime
-from datetime import timedelta
+from db import db
 from salary import calculate_total_earnings, update_salary_record
 
 def check_in(user_id, tyoaika, tuntilaji):
     if user_id is not None:
-        query = text("INSERT INTO Attendance (user_id, check_in, working_time, Hour_class) VALUES (:user_id, :check_in, :tyoaika, :tuntilaji)")
-        db.session.execute(query, {"user_id": user_id, "check_in": datetime.now(), "tyoaika": tyoaika, "tuntilaji": tuntilaji})
+        query = text(
+            "INSERT INTO Attendance (user_id, check_in, working_time, Hour_class) "
+            "VALUES (:user_id, :check_in, :tyoaika, :tuntilaji)"
+        )
+        db.session.execute(
+            query,
+            {
+                "user_id": user_id,
+                "check_in": datetime.now(),
+                "tyoaika": tyoaika,
+                "tuntilaji": tuntilaji,
+            },
+        )
         db.session.commit()
 
 def check_out(user_id, checkout_reason):
     if user_id is not None:
         latest_attendance = get_latest_attendance(user_id)
         if latest_attendance:
-            query = text("UPDATE Attendance SET check_out = :check_out, checkout_reason = :checkout_reason WHERE id = :attendance_id")
-            db.session.execute(query, {"check_out": datetime.now(), "checkout_reason": checkout_reason, "attendance_id": latest_attendance.id})
+            query = text(
+                "UPDATE Attendance SET check_out = :check_out, "
+                "checkout_reason = :checkout_reason "
+                "WHERE id = :attendance_id"
+            )
+            db.session.execute(
+                query,
+                {
+                    "check_out": datetime.now(),
+                    "checkout_reason": checkout_reason,
+                    "attendance_id": latest_attendance.id,
+                },
+            )
             db.session.commit()
+
 
             start_date = latest_attendance.check_in.date()
             start_time = latest_attendance.check_in.time()
-            end_date = latest_attendance.check_out.date() if latest_attendance.check_out else datetime.now().date()
-            end_time = latest_attendance.check_out.time() if latest_attendance.check_out else datetime.now().time()
-   
+            end_date = (
+                latest_attendance.check_out.date()
+                if latest_attendance.check_out
+                else datetime.now().date()
+            )
+
+            end_time = (
+                latest_attendance.check_out.time()
+                if latest_attendance.check_out
+                else datetime.now().time()
+            )
+
             hourly_rate = 12.00
 
             total_earnings = calculate_total_earnings(start_time, end_time, hourly_rate)
@@ -48,7 +78,7 @@ def get_user_attendance_history(user_id):
         if check_out_time:
             work_duration = check_out_time - check_in_time
         else:
-            work_duration = timedelta(0) 
+            work_duration = timedelta(0)
 
         attendance_history.append({
             'date': check_in_time.strftime('%Y-%m-%d'),
@@ -85,6 +115,3 @@ def get_user_id(username):
         return result.id
     else:
         return None
-    
-
-

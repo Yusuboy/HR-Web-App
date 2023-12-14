@@ -1,8 +1,13 @@
-from app import app
-
 from flask import render_template, request, redirect, url_for, session
+from app import app
 from user import login, new_user
-from attendance import check_in, check_out, get_user_id, get_user_attendance_history, get_latest_attendance
+from attendance import (
+    check_in,
+    check_out,
+    get_user_id,
+    get_user_attendance_history,
+    get_latest_attendance,
+)
 from leave import create_leave_request
 
 @app.route('/', methods=['GET', 'POST'])
@@ -34,7 +39,12 @@ def register():
         if "successful" in registration_status:
             return redirect(url_for('index'))
 
-    return render_template('register.html', title='Register', registration_status=registration_status)
+    return render_template(
+        'register.html',
+        title='Register',
+        registration_status=registration_status
+    )
+
 
 
 
@@ -42,18 +52,18 @@ def register():
 def user_home():
     if 'username' not in session:
         # Redirect to the login page or handle unauthorized access
-        return redirect(url_for('login')) 
+        return redirect(url_for('login'))
 
     username = session['username']
     user_id = get_user_id(username)
-    
+
     if request.method == 'POST':
         if 'check_out' in request.form:
             check_out(user_id)
         elif 'logout' in request.form:
             # Clear the session data and redirect to the login page
             session.clear()
-            return redirect(url_for('index'))  
+            return redirect(url_for('index'))
 
     return render_template('home.html', title='User Home', user_id=user_id)
 
@@ -62,7 +72,7 @@ def user_home():
 def attendance():
     if 'username' not in session:
         return redirect(url_for('login'))
-    
+
     username = session['username']
     user_id = get_user_id(username)
     if request.method == 'POST':
@@ -70,14 +80,14 @@ def attendance():
         tuntilaji = request.form.get('tuntilaji')
         check_in(user_id, tyoaika, tuntilaji)
         return redirect(url_for('checkin_confirmation'))
-    
+
     return render_template('attendance.html', title='Attendance', user_id=user_id)
 
 @app.route('/checkout_reason', methods=['GET', 'POST'])
 def checkout_reason():
     if 'username' not in session:
         return redirect(url_for('login'))
-    
+
     username = session['username']
     user_id = get_user_id(username)
     if request.method == 'POST':
@@ -96,7 +106,7 @@ def user_profile():
 
     if 'username' not in session:
         # Redirect to the login page or handle unauthorized access
-        return redirect(url_for('index')) 
+        return redirect(url_for('index'))
 
     username = session['username']
     user_id = get_user_id(username)
@@ -104,13 +114,18 @@ def user_profile():
 
     # print(attendance_history)
 
-    return render_template('profile.html', title='User Profile', username=username, attendance_history=attendance_history)
+    return render_template(
+        'profile.html',
+        title='User Profile',
+        username=username,
+        attendance_history=attendance_history
+    )
 
 @app.route('/leave_request', methods=['GET', 'POST'])
 def leave_request():
     if 'username' not in session:
         return redirect(url_for('login'))
-    
+
     username = session['username']
     user_id = get_user_id(username)
 
@@ -118,7 +133,7 @@ def leave_request():
         start_date = request.form.get('start_date')
         end_date = request.form.get('end_date')
         reason = request.form.get('reason')
-        
+
         username = session['username']
         user_id = get_user_id(username)
 
@@ -132,7 +147,7 @@ def leave_request():
 def checkin_confirmation():
     if 'username' not in session:
         # Redirect to the login page or handle unauthorized access
-        return redirect(url_for('index')) 
+        return redirect(url_for('index'))
     username = session['username']
     user_id = get_user_id(username)
 
