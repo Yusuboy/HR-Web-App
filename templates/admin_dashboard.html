@@ -102,13 +102,41 @@
                             </form>
                         {% else %}
                             <!-- Display some message or disable the buttons for requests with other statuses -->
-                            Request already {{ leave_request.status }}
+                            Request has been {{ leave_request.status }}
                         {% endif %}
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <h2>All Users Work History</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Checkout Reason</th>
+                <th>Hourly Rate</th>
+                <th>Total Earnings</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in all_users_work_history %}
+                <tr>
+                    <td>{{ record.username }}</td>
+                    <td>{{ record.check_in }}</td>
+                    <td>{{ record.check_out }}</td>
+                    <td>{{ record.checkout_reason }}</td>
+                    <td>{{ record.hourly_rate }}</td>
+                    <td>{{ record.total_earnings }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 
     <form method="post" action="{{ url_for('logout') }}">
         <button type="submit" name="logout">Logout</button>

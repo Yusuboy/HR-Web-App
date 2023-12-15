@@ -118,23 +118,12 @@ def get_user_id(username):
 
 
 
-def get_user_work_history(user_id):
-    query = text("SELECT a.check_in, a.check_out, a.checkout_reason, s.hourly_rate, s.total_earnings "
-                 "FROM Attendance a "
-                 "LEFT JOIN Salaries s ON a.user_id = s.user_id AND a.check_in::date BETWEEN s.start_date AND COALESCE(s.end_date, CURRENT_DATE) "
-                 "WHERE a.user_id = :user_id "
-                 "ORDER BY a.check_in DESC")
+def get_all_users_work_history():
+    query = text("SELECT u.username, a.check_in, a.check_out, a.checkout_reason, s.hourly_rate, s.total_earnings "
+                 "FROM Users u "
+                 "LEFT JOIN Attendance a ON u.id = a.user_id "
+                 "LEFT JOIN Salaries s ON u.id = s.user_id AND a.check_in::date BETWEEN s.start_date AND COALESCE(s.end_date, CURRENT_DATE) "
+                 "ORDER BY u.username, a.check_in DESC")
 
-    result = db.session.execute(query, {"user_id": user_id}).fetchall()
-
-    work_history = []
-    for record in result:
-        work_history.append({
-            'check_in': record.check_in.strftime('%Y-%m-%d %H:%M:%S'),
-            'check_out': record.check_out.strftime('%Y-%m-%d %H:%M:%S') if record.check_out else None,
-            'checkout_reason': record.checkout_reason,
-            'hourly_rate': record.hourly_rate,
-            'total_earnings': record.total_earnings,
-        })
-
-    return work_history
+    result = db.session.execute(query).fetchall()
+    return result

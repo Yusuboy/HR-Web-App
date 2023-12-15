@@ -29,7 +29,7 @@ def get_all_leave_requests():
                  "FROM Leave_requests lr "
                  "JOIN Users u ON lr.user_id = u.id")
     result = db.session.execute(query).fetchall()
-    print(result)
+
     return result
 
 
