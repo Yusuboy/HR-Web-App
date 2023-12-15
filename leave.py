@@ -17,3 +17,8 @@ def create_leave_request(user_id, start_date, end_date, reason):
             },
         )
         db.session.commit()
+
+def get_user_leave_requests(user_id):
+    query = text("SELECT id, user_id, start_date, end_date, reason, status FROM Leave_requests WHERE user_id = :user_id")
+    result = db.session.execute(query, {"user_id": user_id}).fetchall()
+    return result

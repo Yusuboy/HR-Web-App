@@ -1,59 +1,96 @@
-<!-- Assuming this is in the same template where you applied the previous styles -->
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 20px;
-        text-align: center;
-    }
-
-    h1 {
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    form {
-        width: 60%;
-        margin: 0 auto;
-        text-align: left;
-    }
-
-    label {
-        display: block;
-        margin: 10px 0 5px;
-        color: #333;
-    }
-
-    input[type="date"],
-    textarea {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    a {
-        color: #007bff;
-        text-decoration: none;
-        display: block;
-        margin-top: 10px;
-    }
-</style>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leave Request - HR-Web-App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 60%;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: transparent;
+            color: #007bff;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            border: 2px solid #007bff;
+            color: #333;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-approved {
+            border-color: #28a745;
+        }
+
+        .status-pending {
+            border-color: #ffc107;
+        }
+
+        .status-rejected {
+            border-color: #dc3545;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Leave Request</h1>
@@ -70,6 +107,16 @@
 
         <input type="submit" value="Submit Leave Request">
     </form>
+
+    <h2>Your Leave Requests</h2>
+    <ul>
+        {% for request in user_leave_requests %}
+            <li class="status-{{ request.status|lower }}">
+                {{ request.start_date }} - {{ request.end_date }}     {{ request.reason }}
+                <span>Status: {{ request.status }}</span>
+            </li>
+        {% endfor %}
+    </ul>
 
     <a href="{{ url_for('user_home') }}">Back to Home</a>
 </body>

@@ -8,7 +8,7 @@ from attendance import (
     get_user_attendance_history,
     get_latest_attendance,
 )
-from leave import create_leave_request
+from leave import create_leave_request, get_user_leave_requests
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -129,6 +129,8 @@ def leave_request():
     username = session['username']
     user_id = get_user_id(username)
 
+    user_leave_requests = get_user_leave_requests(user_id)
+
     if request.method == 'POST':
         start_date = request.form.get('start_date')
         end_date = request.form.get('end_date')
@@ -140,7 +142,7 @@ def leave_request():
         create_leave_request(user_id, start_date, end_date, reason)
         return redirect(url_for('user_home'))
 
-    return render_template('leave_request.html', title='Leave Request')
+    return render_template('leave_request.html', title='Leave Request', user_leave_requests=user_leave_requests )
 
 
 @app.route('/checkin_confirmation')
