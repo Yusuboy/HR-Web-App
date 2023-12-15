@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HR-Web-App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            background-color: transparent;
+            color: #007bff;
+            padding: 8px 12px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        form {
+            display: inline-block;
+        }
+
+        form button {
+            margin-left: 5px;
+        }
+
+        form button:last-child {
+            margin-left: 0;
+        }
+
+        form button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for leave_request in leave_requests %}
+                <tr>
+                    <td>{{ leave_request.username }}</td>
+                    <td>{{ leave_request.start_date }}</td>
+                    <td>{{ leave_request.end_date }}</td>
+                    <td>{{ leave_request.reason }}</td>
+                    <td>{{ leave_request.status }}</td>
+                    <td>
+                        {% if leave_request.status == 'Pending' %}
+                            <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='approve') }}">
+                                <button type="submit">Approve</button>
+                            </form>
+                            <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='reject') }}">
+                                <button type="submit">Reject</button>
+                            </form>
+                        {% else %}
+                            <!-- Display some message or disable the buttons for requests with other statuses -->
+                            Request already {{ leave_request.status }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form method="post" action="{{ url_for('logout') }}">
+        <button type="submit" name="logout">Logout</button>
+    </form>
+</body>
+</html>

@@ -8,7 +8,7 @@ from attendance import (
     get_user_attendance_history,
     get_latest_attendance,
 )
-from leave import create_leave_request, get_user_leave_requests
+from leave import create_leave_request, get_user_leave_requests, get_all_leave_requests, update_leave_status
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -17,6 +17,11 @@ def index():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
+
+        if username == 'Admin' and password == '123456':
+            # Set a session variable to identify the user as an admin
+            session['is_admin'] = True
+            return redirect(url_for('admin_dashboard'))
 
         notification = login(username, password)
 
@@ -45,7 +50,11 @@ def register():
         registration_status=registration_status
     )
 
-
+@app.route('/logout', methods=['POST'])
+def logout():
+    # Clear the session data and redirect to the login page
+    session.clear()
+    return redirect(url_for('index'))
 
 
 @app.route('/user_home', methods=['GET', 'POST'])
@@ -156,3 +165,46 @@ def checkin_confirmation():
     attendance = get_latest_attendance(user_id)
     # print(attendance)
     return render_template('checkin_confirmation.html', attendance=attendance)
+
+
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    # Check if the user is logged in and is an admin
+    if 'is_admin' not in session or not session['is_admin']:
+        return redirect(url_for('index'))
+    
+
+    if request.method == 'POST':
+        if 'logout' in request.form:
+            # Clear the session data and redirect to the login page
+            session.clear()
+            return redirect(url_for('index'))
+    
+
+    # Get all leave requests
+    leave_requests = get_all_leave_requests()
+
+    return render_template('admin_dashboard.html', title='Admin Dashboard', leave_requests=leave_requests)
+
+
+@app.route('/approve_reject_leave/<int:leave_id>/<action>', methods=['POST'])
+def approve_reject_leave(leave_id, action):
+    # Check if the user is logged in and is an admin
+    if 'is_admin' not in session or not session['is_admin']:
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        if 'logout' in request.form:
+            # Clear the session data and redirect to the login page
+            session.clear()
+            return redirect(url_for('index'))
+
+
+    # Perform the approval or rejection logic based on the action parameter
+    if action == 'approve':
+        update_leave_status(leave_id, 'Approved')
+    elif action == 'reject':
+        update_leave_status(leave_id, 'Rejected')
+
+    # Redirect back to the admin dashboard
+    return redirect(url_for('admin_dashboard'))

@@ -22,3 +22,18 @@ def get_user_leave_requests(user_id):
     query = text("SELECT id, user_id, start_date, end_date, reason, status FROM Leave_requests WHERE user_id = :user_id")
     result = db.session.execute(query, {"user_id": user_id}).fetchall()
     return result
+
+
+def get_all_leave_requests():
+    query = text("SELECT lr.id, u.username, lr.start_date, lr.end_date, lr.reason, lr.status "
+                 "FROM Leave_requests lr "
+                 "JOIN Users u ON lr.user_id = u.id")
+    result = db.session.execute(query).fetchall()
+    print(result)
+    return result
+
+
+def update_leave_status(leave_id, status):
+    query = text("UPDATE Leave_requests SET status = :status WHERE id = :leave_id")
+    db.session.execute(query, {"status": status, "leave_id": leave_id})
+    db.session.commit()

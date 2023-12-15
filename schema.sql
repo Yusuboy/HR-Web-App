@@ -37,10 +37,23 @@ CREATE TABLE Salaries (
     CONSTRAINT user_id_end_date_unique UNIQUE (user_id, end_date)
 );
 
--- Define the 'documents' table to store employee documents
-CREATE TABLE Documents (
+
+
+CREATE TABLE Admin (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    document_name VARCHAR(100) NOT NULL,
-    document_url TEXT NOT NULL
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(1000) NOT NULL
 );
+
+
+-- -- Define the 'documents' table to store employee documents
+-- CREATE TABLE Documents (
+--     id SERIAL PRIMARY KEY,
+--     user_id INT REFERENCES users(id),
+--     document_name VARCHAR(100) NOT NULL,
+--     document_url TEXT NOT NULL
+-- );
+
+INSERT INTO Admin (username, password) VALUES ('Admin', 'hashed_password_of_123456');
+ALTER TABLE Users ADD COLUMN is_admin BOOLEAN DEFAULT FALSE;
+UPDATE Users SET is_admin = TRUE WHERE username = 'Admin';
