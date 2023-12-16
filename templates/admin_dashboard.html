@@ -127,8 +127,8 @@
             {% for record in work_history %}
                 <tr>
                     <td>{{ record.username }}</td>
-                    <td>{{ record.check_in }}</td>
-                    <td>{{ record.check_out }}</td>
+                    <td>{{ record.check_in.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ record.check_out.strftime('%Y-%m-%d %H:%M') }}</td>
                     <td>{{ record.checkout_reason }}</td>
                     <td>{{ record.hourly_rate }}</td>
                     <td>{{ record.total_earnings }}</td>
