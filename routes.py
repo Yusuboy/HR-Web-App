@@ -155,7 +155,7 @@ def leave_request():
         user_id = get_user_id(username)
 
         create_leave_request(user_id, start_date, end_date, reason)
-        return redirect(url_for('user_home'))
+        return redirect(url_for('leave_request'))
 
     return render_template('leave_request.html', title='Leave Request', user_leave_requests=user_leave_requests )
 
