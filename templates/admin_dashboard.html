@@ -115,16 +115,16 @@
     <table>
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Check In</th>
-                <th>Check Out</th>
-                <th>Checkout Reason</th>
+                <th>Employee</th>
+                <th>Stamp In</th>
+                <th>Stamp Out</th>
+                <th>Stamp out Reason</th>
                 <th>Hourly Rate</th>
                 <th>Total Earnings</th>
-            </tr>
+            </tr>Username
         </thead>
         <tbody>
-            {% for record in all_users_work_history %}
+            {% for record in work_history %}
                 <tr>
                     <td>{{ record.username }}</td>
                     <td>{{ record.check_in }}</td>
