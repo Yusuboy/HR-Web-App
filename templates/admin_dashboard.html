@@ -69,6 +69,13 @@
             opacity: 0.5;
         }
     </style>
+    <script>
+        function removeLeaveRequest(leaveRequestId) {
+            // Assuming each leave request row has a unique ID, hide the corresponding row
+            var row = document.getElementById(leaveRequestId);
+            row.style.display = 'none';
+        }
+    </script>
 </head>
 <body>
     <h1>Admin Dashboard</h1>
@@ -86,7 +93,8 @@
         </thead>
         <tbody>
             {% for leave_request in leave_requests %}
-                <tr>
+
+                <tr id="{{ leave_request.id }}">
                     <td>{{ leave_request.username }}</td>
                     <td>{{ leave_request.start_date }}</td>
                     <td>{{ leave_request.end_date }}</td>
@@ -100,9 +108,12 @@
                             <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='reject') }}">
                                 <button type="submit">Reject</button>
                             </form>
+                            
                         {% else %}
                             <!-- Display some message or disable the buttons for requests with other statuses -->
+                            
                             Request has been {{ leave_request.status }}
+                            <button type="button" onclick="removeLeaveRequest('{{ leave_request.id }}')">Remove</button>
                         {% endif %}
                     </td>
                 </tr>

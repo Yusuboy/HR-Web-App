@@ -30,7 +30,7 @@ def new_user(username, password):
         return "Registration failed. Please choose a password with at least 5 characters."
 
 
-    query = text("SELECT id, username, password FROM Users WHERE username=:username")
+    query = text("SELECT id, username, password FROM Users, Admin WHERE username=:username")
     existing_user = db.session.execute(query, {"username": username}).first()
 
     if existing_user:
