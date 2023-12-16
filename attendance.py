@@ -61,7 +61,7 @@ def check_out(user_id, checkout_reason):
 
 
 
-def calculate_salary_for_attendance(user_id, start_date, end_date, hourly_rate):
+def calculate_salary_for_attendance(user_id, start_date, end_date):
     total_earnings = calculate_total_earnings(user_id, start_date, end_date)
     return total_earnings
 

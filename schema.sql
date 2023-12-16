@@ -1,4 +1,4 @@
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(1000) NOT NULL -- Hashed password
@@ -6,7 +6,7 @@ CREATE TABLE Users (
 );
 
 -- Define the 'attendance' table to track employee attendance
-CREATE TABLE Attendance (
+CREATE TABLE IF NOT EXISTS Attendance (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     working_time TEXT,
@@ -17,7 +17,7 @@ CREATE TABLE Attendance (
 );
 
 -- Define the 'leave_requests' table to manage employee leave requests
-CREATE TABLE Leave_requests (
+CREATE TABLE IF NOT EXISTS Leave_requests (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     start_date DATE NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE Leave_requests (
 );
 
 -- Define the 'salaries' table to manage employee salaries
-CREATE TABLE Salaries (
+CREATE TABLE IF NOT EXISTS Salaries (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     start_date DATE NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE Salaries (
 
 
 
-CREATE TABLE Admin (
+CREATE TABLE IF NOT EXISTS Admin (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(1000) NOT NULL
@@ -54,6 +54,6 @@ CREATE TABLE Admin (
 --     document_url TEXT NOT NULL
 -- );
 
-INSERT INTO Admin (username, password) VALUES ('Admin', 'hashed_password_of_123456');
+INSERT INTO Admin (username, password) VALUES ('Admin', '123456');
 ALTER TABLE Users ADD COLUMN is_admin BOOLEAN DEFAULT FALSE;
-UPDATE Users SET is_admin = TRUE WHERE username = 'Admin';
+
