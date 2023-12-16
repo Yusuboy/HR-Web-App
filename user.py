@@ -23,6 +23,9 @@ def login(username, password):
         return "Login failed. Check your username and password."
 
 def new_user(username, password):
+    if username.isspace() or password.isspace():
+        return "Registration failed. Username and password are required for registration."
+    
     if len(password) < 5:
         return "Registration failed. Please choose a password with at least 5 characters."
 
