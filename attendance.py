@@ -113,8 +113,7 @@ def get_user_id(username):
     result = db.session.execute(query, {"username": username}).fetchone()
     if result:
         return result.id
-    else:
-        return None
+
 
 
 

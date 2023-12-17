@@ -29,17 +29,18 @@ Käyttäjä voi kirjautua ulos käyttäjän kotisivulla.
 
 - Lomahakemus (Leave Request):
 Käyttäjä voi tehdä lomahakemuksen, ja tämä näkyy käyttäjäprofiilisivulla.
+Käyttäjän lomahakemuket näktvät samalla sivulla ja ne ovat värikoodattuja. Keltainen (pending), vihreä (Approved) ja punainen (rejected).
 
 - Navigointi (Navigation):
 käyttäjä voi hinosti navigoida eri sivustojen välillä.
 
 - Palkka (Salary)
-Jokaisella työntekijällä on 12/e tuntipalkka. Tällä hetkelle 12/e minuuttipalkka, mutta muutetaan myohemmin.
+Jokaisella työntekijällä on 12/e tuntipalkka.
 
-## Vielä tehtävänä
-
-- Admin tili, joka hallinnoi työntekijöitä.
-Tarkoituksena olisi, että olisi yksi Adimin/HR tili, joka kykene tarkastelemaan työntekijöiden työhistoriaa sekä vastata lomahakemuskiin hyväkymällä tai hylkäämällä. Tämä on yhä työn alla.
+- Admin/HR - käyttäjä
+Admin käyttäjään voidaan kirjautua. Käyttäjänimi: Admin ja Salasana: 123456
+Admin-kätyttäjä ohjataan dashboard sivustolle kirjatueesaan sisääle. 
+Dasboard sivulla, Admin näkee kaikki lomaanomukset sekä kaikkien työntekijöiden työhistorian. Admin voi, joko hyväksyä ja hylätä lomahakemuksen, joka sitten päivittyy työntekijälle myös. 
 
 
 ## Testaaminen tuotannossa
@@ -65,10 +66,15 @@ $ pip install -r requirements.txt
 
 4. Set the database schema. Note that you will need to have psql database running
 ```
-psql < schema.sql
+$ psql < drop_tables.sql
+$ psql < schema.sql
 ```
 
+5. Add Employees to the database. Note that this is optional but recommended
+```
+$ psql < insert_information.sql
+```
 5.  Run the application using the command:
 ```
-flask run
+$ flask run
 ```

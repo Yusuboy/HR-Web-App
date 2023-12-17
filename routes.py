@@ -1,10 +1,10 @@
+import secrets
 from flask import (
  render_template, request,
  redirect,
  url_for, session, abort)
 
 from app import app
-import secrets
 from user import login, new_user
 from attendance import (
     check_in,
@@ -27,7 +27,7 @@ def index():
 
     if request.method == 'POST':
         if request.form.get('csrf_token') != session.get('csrf_token'):
-            abort(403) 
+            abort(403)
         username = request.form.get('username')
         password = request.form.get('password')
 
@@ -40,9 +40,11 @@ def index():
 
         if "successful" in notification:
             return redirect(url_for('user_home'))
-        
+
     session['csrf_token'] = secrets.token_hex(16)
-    return render_template('index.html', title='HR-Web-APP', notification=notification, csrf_token=session['csrf_token'])
+    return render_template('index.html', title='HR-Web-APP',
+                           notification=notification,
+                           csrf_token=session['csrf_token'])
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -51,7 +53,7 @@ def register():
 
     if request.method == 'POST':
         if request.form.get('csrf_token') != session.get('csrf_token'):
-            abort(403) 
+            abort(403)
         new_username = request.form.get('new_username')
         new_password = request.form.get('new_password')
 
@@ -86,7 +88,7 @@ def user_home():
 
     if request.method == 'POST':
         if request.form.get('csrf_token') != session.get('csrf_token'):
-            abort(403)  
+            abort(403)
 
         if 'check_out' in request.form:
             check_out(user_id)
@@ -94,9 +96,11 @@ def user_home():
             # Clear the session data and redirect to the login page
             session.clear()
             return redirect(url_for('index'))
-        
+
     session['csrf_token'] = secrets.token_hex(16)
-    return render_template('home.html', title='User Home', user_id=user_id, csrf_token=session['csrf_token'])
+    return render_template('home.html', title='User Home',
+                           user_id=user_id,
+                           csrf_token=session['csrf_token'])
 
 # Create a new route for attendance
 @app.route('/attendance', methods=['GET', 'POST'])
@@ -108,16 +112,18 @@ def attendance():
     user_id = get_user_id(username)
     if request.method == 'POST':
         if request.form.get('csrf_token') != session.get('csrf_token'):
-            abort(403) 
+            abort(403)
         tyoaika = request.form.get('tyoaika')
         tuntilaji = request.form.get('tuntilaji')
         check_in(user_id, tyoaika, tuntilaji)
         return redirect(url_for('checkin_confirmation'))
-    
+
     session['csrf_token'] = secrets.token_hex(16)
 
 
-    return render_template('attendance.html', title='Attendance', user_id=user_id, csrf_token=session['csrf_token'])
+    return render_template('attendance.html', title='Attendance',
+                           user_id=user_id,
+                           csrf_token=session['csrf_token'])
 
 @app.route('/checkout_reason', methods=['GET', 'POST'])
 def checkout_reason():
@@ -129,7 +135,7 @@ def checkout_reason():
     if request.method == 'POST':
 
         if request.form.get('csrf_token') != session.get('csrf_token'):
-            abort(403) 
+            abort(403)
         checkout_reason = request.form.get('checkout_reason')
         check_out(user_id, checkout_reason)
         return redirect(url_for('user_home'))
@@ -137,7 +143,8 @@ def checkout_reason():
     session['csrf_token'] = secrets.token_hex(16)
 
     return render_template('checkout_reason.html',
-                           title='Checkout Reason',user_id=user_id, csrf_token=session['csrf_token'])
+                           title='Checkout Reason',user_id=user_id,
+                           csrf_token=session['csrf_token'])
 
 
 @app.route('/profile')
@@ -177,7 +184,7 @@ def leave_request():
     if request.method == 'POST':
 
         if request.form.get('csrf_token') != session.get('csrf_token'):
-            abort(403) 
+            abort(403)
 
         start_date = request.form.get('start_date')
         end_date = request.form.get('end_date')
@@ -226,7 +233,7 @@ def admin_dashboard():
             # Clear the session data and redirect to the login page
             session.clear()
             return redirect(url_for('index'))
-        
+
     session['csrf_token'] = secrets.token_hex(16)
 
     # Get all leave requests
@@ -249,7 +256,7 @@ def approve_reject_leave(leave_id, action):
 
     if request.method == 'POST':
         if request.form.get('csrf_token') != session.get('csrf_token'):
-            abort(403) 
+            abort(403)
         if 'logout' in request.form:
             # Clear the session data and redirect to the login page
             session.clear()
@@ -262,6 +269,6 @@ def approve_reject_leave(leave_id, action):
     elif action == 'reject':
         update_leave_status(leave_id, 'Rejected')
 
-    
+
     # Redirect back to the admin dashboard
     return redirect(url_for('admin_dashboard'))

@@ -68,6 +68,30 @@
             cursor: not-allowed;
             opacity: 0.5;
         }
+
+        .work-history-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .work-history-table th, .work-history-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .work-history-table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Add a divider row between different employees */
+        .work-history-table tbody tr.divider-row td {
+            background-color: #f7f7f7;
+            height: 1px;
+        }
+        
     </style>
     <script>
         function removeLeaveRequest(leaveRequestId) {
@@ -125,35 +149,51 @@
 
     <h1>Employees Work History</h1>
 
-    <table>
+    <table class="work-history-table">
         <thead>
             <tr>
+                <th>Date</th>
                 <th>Employee</th>
-                <th>Stamp In</th>
-                <th>Stamp Out</th>
-                <th>Stamp out Reason</th>
+                <th>Work Details</th>
                 <th>Hourly Rate</th>
                 <th>Total Earnings</th>
             </tr>
         </thead>
         <tbody>
+            {% set current_date = None %}
             {% for record in work_history %}
                 <tr>
-                    <td>{{ record.username }}</td>
-                    <td>{% if record.check_in %}{{ record.check_in.strftime('%Y-%m-%d %H:%M') }}{% else %}N/A{% endif %}</td>
-                    <td>{% if record.check_out %}{{ record.check_out.strftime('%Y-%m-%d %H:%M') }}{% else %}N/A{% endif %}</td>
-                    <td>{% if record.checkout_reason %}{{ record.checkout_reason }}{% else %}N/A{% endif %}</td>
-                    <td>{% if record.hourly_rate %}{{ record.hourly_rate }}{% else %}N/A{% endif %}</td>
-                    <td>{% if record.total_earnings %}{{ record.total_earnings }}{% else %}N/A{% endif %}</td>
+                    {% if record.check_in %}
+                        {% if record.check_in.date() != current_date %}
+                            <td>{{ record.check_in.strftime('%Y-%m-%d') }}</td>
+                            {% set current_date = record.check_in.date() %}
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                        <td>{{ record.username }}</td>
+                        <td>
+                            <strong>Stamp In:</strong> {{ record.check_in.strftime('%Y-%m-%d %H:%M') }}<br>
+                            <strong>Stamp Out:</strong> {% if record.check_out %}{{ record.check_out.strftime('%Y-%m-%d %H:%M') }}{% else %}N/A{% endif %}<br>
+                            <strong>Reason:</strong> {% if record.checkout_reason %}{{ record.checkout_reason }}{% else %}N/A{% endif %}
+                        </td>
+                        <td>{{ record.hourly_rate if record.hourly_rate else 'N/A' }}</td>
+                        <td>{{ record.total_earnings if record.total_earnings else 'N/A' }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                        <td>{{ record.username }}</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-
-
+    
     <form method="post" action="{{ url_for('logout') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <button type="submit" name="logout">Logout</button>
     </form>
-</body>
-</html>
+    </body>
+    </html>
+    
