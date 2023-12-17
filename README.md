@@ -1,10 +1,10 @@
 # HR-WEB-APP
 ## Kuvaus
 HR-Web-App on sovellus, joka tarjoaa tehokkaan ja käyttäjäystävällisen tavan seurata työntekijöiden läsnäoloa ja työaikoja organisaatiossasi. Sovellus tarjoaa seuraavia keskeisiä toimintoja:
-- Läsnäolon seuranta: Työntekijät voivat kirjata sisään ja ulos, ja järjestelmä tallentaa automaattisesti työpäivien keston.
-- Työaikojen seuranta: Sovellus tallentaa työntekijöiden työskentelytunnit, tauot ja poissaolot.
+- Läsnäolon seuranta: Työntekijät voivat kirjautua sisään ja ulos, järjestelmästä.
+- Työaikojen seuranta: Sovellus tallentaa työntekijöiden työskentelytunnit sekä siihen liittyvät palkat, tauot ja poissaolot.
 - Päivittäinen leimaus: Työntekijät voivat tehdä päivittäisiä leimauksia työpäivän alussa ja lopussa, mikä helpottaa tarkkaa ajanseurantaa.
-- Admin/HR Läsnäolo seuranta: Seuraa työntekijöiden työaikoja, läsnäoloa ja taukoja, mikä helpottaa aikataulujen seurantaa ja hallintaa.
+- Admin/HR Läsnäolo seuranta: Seuraa työntekijöiden työaikoja, läsnäoloa ja taukoja, mikä helpottaa aikataulujen seurantaa ja hallintaa. Voi seurata myös työntekijöiden tuoloja.
 - Lomien hallinta: Työntekijät voivat pyytää lomia, ja esimiehet voivat tehokkaasti hyväksyä tai hylätä pyynnöt, mikä auttaa ylläpitämään tasapainoista henkilöstöä.
 
 ## Valmiina
@@ -28,13 +28,13 @@ Käyttäjä voi tarkastella työajanhistoriaansa päivämäärän, keston, sisä
 Käyttäjä voi kirjautua ulos käyttäjän kotisivulla.
 
 - Lomahakemus (Leave Request):
-Käyttäjä voi tehdä lomahakemuksen, ja tämä näkyy käyttäjäprofiilisivulla. Käyttäjän lomahakemukset näkyvät samalla sivulla ja ne ovat värikoodattuja: Keltainen (pending), vihreä (approved) ja punainen (rejected).
+Käyttäjä voi tehdä lomahakemuksen/ilmoittaa poissaolosta, ja tämä näkyy käyttäjäprofiilisivulla. Käyttäjän lomahakemukset näkyvät samalla sivulla ja ne ovat värikoodattuja: Keltainen (pending), vihreä (approved) ja punainen (rejected).
 
 - Navigointi (Navigation):
 Käyttäjä voi helposti navigoida eri sivustojen välillä.
 
 - Palkka (Salary):
-Jokaisella työntekijällä on 12 dollarin tuntipalkka.
+Jokaisella työntekijällä on 12 euron tuntipalkka.
 
 - Admin/HR - käyttäjä:
 Admin-käyttäjään voidaan kirjautua käyttäjänimellä: Admin ja salasanalla: 123456. Admin-käyttäjä ohjataan dashboard-sivustolle kirjauduttuaan sisään. Dashboard-sivulla Admin näkee kaikki loma-anomukset sekä kaikkien työntekijöiden työhistorian. Admin voi hyväksyä tai hylätä lomahakemuksia, ja päätökset päivittyvät myös työntekijöille.
