@@ -1,4 +1,3 @@
-# In salary.py
 from sqlalchemy import text
 from db import db
 from datetime import datetime
@@ -9,19 +8,11 @@ def calculate_total_earnings(start_date, end_date, hourly_rate):
     return total_earnings
 
 def calculate_work_duration_in_hours(start_date, end_date):
-    # print(start_date)
-    # print(end_date)
-    print(start_date)
-    print(end_date)
-
 
     today = datetime.today()
     work_duration = datetime.combine(today, end_date) - datetime.combine(today, start_date)
 
-
-    print(work_duration)
     work_duration_hours = work_duration.total_seconds() / 60
-    print(work_duration_hours)
     return work_duration_hours
 
 def update_salary_record(user_id, start_date, end_date, hourly_rate, total_earnings):

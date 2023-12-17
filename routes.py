@@ -160,7 +160,6 @@ def user_profile():
     user_id = get_user_id(username)
     attendance_history = get_user_attendance_history(user_id)
 
-    # print(attendance_history)
     session['csrf_token'] = secrets.token_hex(16)
 
     return render_template(
