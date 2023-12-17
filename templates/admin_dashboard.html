@@ -140,11 +140,11 @@
             {% for record in work_history %}
                 <tr>
                     <td>{{ record.username }}</td>
-                    <td>{{ record.check_in.strftime('%Y-%m-%d %H:%M') }}</td>
-                    <td>{{ record.check_out.strftime('%Y-%m-%d %H:%M') }}</td>
-                    <td>{{ record.checkout_reason }}</td>
-                    <td>{{ record.hourly_rate }}</td>
-                    <td>{{ record.total_earnings }}</td>
+                    <td>{% if record.check_in %}{{ record.check_in.strftime('%Y-%m-%d %H:%M') }}{% else %}N/A{% endif %}</td>
+                    <td>{% if record.check_out %}{{ record.check_out.strftime('%Y-%m-%d %H:%M') }}{% else %}N/A{% endif %}</td>
+                    <td>{% if record.checkout_reason %}{{ record.checkout_reason }}{% else %}N/A{% endif %}</td>
+                    <td>{% if record.hourly_rate %}{{ record.hourly_rate }}{% else %}N/A{% endif %}</td>
+                    <td>{% if record.total_earnings %}{{ record.total_earnings }}{% else %}N/A{% endif %}</td>
                 </tr>
             {% endfor %}
         </tbody>
