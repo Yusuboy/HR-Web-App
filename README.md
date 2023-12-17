@@ -41,42 +41,42 @@ Admin-käyttäjään voidaan kirjautua käyttäjänimellä: Admin ja salasanalla
 
 
 
-
+## SOVELLUS EI OLE SAATAVILLA FLY.IO:SSA
 
 
 
 
 ## Testaaminen tuotannossa
 
-1. Clone the repository to your device and go to the root directory.
+1. Kloonaa repositorio koneellesi ja siirry juurikansioon.
 ```
 git clone git@github.com:Yusuboy/HR-Web-App.git
 ```
 
-2. Create .env-file to project root with following contents:
+2. Luo .env-tiedosto projektin juureen, ja lisää tiedostoon seuraava:
 ```
 DATABASE_URL=<local-address-of-database>
 SECRET_KEY=<secret-key>
 ```
 
-3. Activate the virtual environment and install the requirements in root directory.
+3. Siirry virtuaaliympäristöön ja asenna vaatimukset juurikansioon.
 ```
 $ python3 -m venv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-4. Set the database schema. Note that you will need to have psql database running
+4. Määritä tietokannan skeema. Huomaa, että psql-tietokannan on oltava käynnissä.
 ```
 $ psql < drop_tables.sql
 $ psql < schema.sql
 ```
 
-5. Add Employees to the database. Note that this is optional but recommended
+5. Lisää työntekijöitä tietokantaan.
 ```
 $ psql < insert_information.sql
 ```
-5.  Run the application using the command:
+5.  Käynnistä sovellus komennolla:
 ```
 $ flask run
 ```
