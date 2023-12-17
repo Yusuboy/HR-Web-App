@@ -63,10 +63,10 @@ Admin-käyttäjään voidaan kirjautua käyttäjänimellä: Admin ja salasanalla
 git clone git@github.com:Yusuboy/HR-Web-App.git
 ```
 
-2. Luo .env-tiedosto projektin juureen, ja lisää tiedostoon seuraava:
+2. Luo .env-tiedosto projektin juureen, ja määritä sen sisältö seuraavanlaiseksi::
 ```
-DATABASE_URL=<local-address-of-database>
-SECRET_KEY=<secret-key>
+DATABASE_URL=<tietokannan-paikallinen-osoite>
+SECRET_KEY=<salainen-avain>
 ```
 
 3. Siirry virtuaaliympäristöön ja asenna vaatimukset juurikansioon.
