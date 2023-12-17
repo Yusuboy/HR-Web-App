@@ -76,7 +76,7 @@ $ psql < schema.sql
 ```
 $ psql < insert_information.sql
 ```
-5.  Käynnistä sovellus komennolla:
+6.  Käynnistä sovellus komennolla:
 ```
 $ flask run
 ```
