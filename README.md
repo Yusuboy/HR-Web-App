@@ -53,11 +53,10 @@ Admin-käyttäjään voidaan kirjautua käyttäjänimellä: Admin ja salasanalla
 git clone git@github.com:Yusuboy/HR-Web-App.git
 ```
 
-2. Create .env-file to project root with following contents
-(your_db_name and your_secret_key can be chosen freely at this point):
+2. Create .env-file to project root with following contents:
 ```
-DATABASE_URL="postgresql:///your_db_name"
->SECRET_KEY="your_secret_key"
+DATABASE_URL=<local-address-of-database>
+SECRET_KEY=<secret-key>
 ```
 
 3. Activate the virtual environment and install the requirements in root directory.
