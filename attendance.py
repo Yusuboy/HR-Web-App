@@ -67,28 +67,22 @@ def calculate_salary_for_attendance(user_id, start_date, end_date):
 
 
 def get_user_attendance_history(user_id):
-    user_attendance = get_user_attendance(user_id)
+    query = text(
+        "SELECT a.id AS attendance_id, u.id AS user_id, a.check_in, a.check_out, "
+        "CASE WHEN a.check_out IS NOT NULL THEN a.check_out - a.check_in ELSE interval '0' END AS work_duration, "
+        "to_char(a.check_in, 'YYYY-MM-DD') AS date, "
+        "to_char(a.check_in, 'HH24:MI') AS check_in_time, "
+        "to_char(a.check_out, 'HH24:MI') AS check_out_time, "
+        "to_char(a.check_in, 'Day') AS day_of_week "  # Convert to the day name
+        "FROM Attendance a "
+        "JOIN Users u ON a.user_id = u.id "
+        "WHERE u.id = :user_id "
+        "ORDER BY a.check_in DESC;"
+    )
+    
+    result = db.session.execute(query, {"user_id": user_id}).fetchall()
 
-    attendance_history = []
-
-    for record in user_attendance:
-        check_in_time = record.check_in
-        check_out_time = record.check_out
-
-        if check_out_time:
-            work_duration = check_out_time - check_in_time
-        else:
-            work_duration = timedelta(0)
-
-        attendance_history.append({
-            'date': check_in_time.strftime('%Y-%m-%d'),
-            'day_of_week': check_in_time.strftime('%A'),
-            'check_in_time': check_in_time.strftime('%H:%M'),  # Format the time as hour:minute
-            'check_out_time': check_out_time.strftime('%H:%M') if check_out_time else None,
-            'work_duration': work_duration
-        })
-
-    return attendance_history
+    return result
 
 
 def get_latest_attendance(user_id):
