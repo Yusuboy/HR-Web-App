@@ -73,9 +73,11 @@ def get_user_attendance_history(user_id):
         "to_char(a.check_in, 'YYYY-MM-DD') AS date, "
         "to_char(a.check_in, 'HH24:MI') AS check_in_time, "
         "to_char(a.check_out, 'HH24:MI') AS check_out_time, "
-        "to_char(a.check_in, 'Day') AS day_of_week "  # Convert to the day name
+        "to_char(a.check_in, 'Day') AS day_of_week, "
+        "s.hourly_rate, s.total_earnings "
         "FROM Attendance a "
         "JOIN Users u ON a.user_id = u.id "
+        "LEFT JOIN Salaries s ON a.user_id = s.user_id AND a.check_in::date BETWEEN s.start_date AND COALESCE(s.end_date, CURRENT_DATE) "
         "WHERE u.id = :user_id "
         "ORDER BY a.check_in DESC;"
     )
@@ -94,13 +96,17 @@ def get_latest_attendance(user_id):
     return result
 
 
-def get_user_attendance(user_id):
-    query = text(
-        "SELECT id, user_id, working_time, hour_class, check_in, check_out, checkout_reason "
-        "FROM Attendance WHERE user_id = :user_id"
-    )
-    result = db.session.execute(query, {"user_id": user_id}).fetchall()
-    return result
+# def get_user_attendance(user_id):
+#     query = text(
+#         "SELECT a.id, a.user_id, a.working_time, a.hour_class, a.check_in, a.check_out, a.checkout_reason, "
+#         "s.hourly_rate, s.total_earnings "
+#         "FROM Attendance a "
+#         "LEFT JOIN Salaries s ON a.user_id = s.user_id AND a.check_in::date BETWEEN s.start_date AND COALESCE(s.end_date, CURRENT_DATE) "
+#         "WHERE a.user_id = :user_id "
+#         "ORDER BY a.check_in DESC"
+#     )
+#     result = db.session.execute(query, {"user_id": user_id}).fetchall()
+#     return result
 
 def get_user_id(username):
     query = text("SELECT id FROM Users WHERE username = :username")

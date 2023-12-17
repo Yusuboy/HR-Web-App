@@ -46,6 +46,8 @@
             <th>Minutes</th>
             <th>Check-in</th>
             <th>Check-out</th>
+            <th>Earnings/Hour</th>
+
         </tr>
     </thead>
     <tbody>
@@ -57,6 +59,7 @@
                 <td>{{ (record.work_duration.seconds // 60) % 60 }}</td>
                 <td>{{ record.check_in_time }}</td>
                 <td>{{ record.check_out_time }}</td>
+                <td>{{ record.total_earnings }}</td>
             </tr>
         {% endfor %}
     </tbody>
