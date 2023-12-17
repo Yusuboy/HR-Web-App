@@ -12,7 +12,7 @@ def calculate_work_duration_in_hours(start_date, end_date):
     today = datetime.today()
     work_duration = datetime.combine(today, end_date) - datetime.combine(today, start_date)
 
-    work_duration_hours = work_duration.total_seconds() / 60
+    work_duration_hours = work_duration.total_seconds() / 3600
     return work_duration_hours
 
 def update_salary_record(user_id, start_date, end_date, hourly_rate, total_earnings):

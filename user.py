@@ -30,6 +30,9 @@ def new_user(username, password):
 
     if len(password) < 5:
         return "Registration failed. Please choose a password with at least 5 characters."
+    
+    if len(username) < 5:
+        return "Registration failed. Please choose a username with at least 5 characters."
 
 
     query = text("SELECT id, username, password FROM Users "

@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendance</title>
     <style>
-        /* Styles for form elements */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+    
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    
         form {
             margin-top: 20px;
-            text-align: left;
+            text-align: center; 
         }
 
         label {
@@ -17,12 +27,22 @@
             color: #333;
             font-weight: bold;
         }
-
-        input[type="submit"],
-        button {
+    
+        select {
             width: 100%;
+            padding: 12px; 
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+    
+        input[type="submit"] {
+            width: 200px;
             padding: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             box-sizing: border-box;
             background-color: #007bff;
             color: #fff;
@@ -32,24 +52,17 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-
-        input[type="submit"]:hover,
-        button:hover {
+    
+        input[type="submit"]:hover {
             background-color: #0056b3;
         }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-
+    
         a {
             color: #007bff;
             text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -77,7 +90,7 @@
 
     <br>
 
-    <!-- Add other input fields if needed -->
+
 
     <input type="submit" value="Stamp in">
 </form>
