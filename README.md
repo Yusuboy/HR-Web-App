@@ -37,7 +37,7 @@ Käyttäjä voi helposti navigoida eri sivustojen välillä.
 Jokaisella työntekijällä on 12 euron tuntipalkka.
 
 - Admin/HR - käyttäjä:
-Admin-käyttäjään voidaan kirjautua käyttäjänimellä: Admin ja salasanalla: 123456. Admin-käyttäjä ohjataan dashboard-sivustolle kirjauduttuaan sisään. Dashboard-sivulla Admin näkee kaikki loma-anomukset sekä kaikkien työntekijöiden työhistorian. Admin voi hyväksyä tai hylätä lomahakemuksia, ja päätökset päivittyvät myös työntekijöille.
+Admin-käyttäjään voidaan kirjautua käyttäjänimellä: Admin ja salasanalla: 123456. Tämä edustaa ainoaa hallinto- ja henkilöstöhallinnon käyttäjätiliä, jolla on hallinnolliset oikeudet; uusia tällaisia ei voida luoda. Admin-käyttäjä ohjataan dashboard-sivustolle kirjauduttuaan sisään. Dashboard-sivulla Admin näkee kaikki loma-anomukset sekä kaikkien työntekijöiden työhistorian. Admin voi hyväksyä tai hylätä lomahakemuksia, ja päätökset päivittyvät myös työntekijöille. On vain yksi
 
 
 ## Kehitysideoita
