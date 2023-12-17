@@ -90,3 +90,5 @@ $ psql < insert_information.sql
 ```
 $ flask run
 ```
+
+Sovelluksessa on käytetty kielimallia chatgpt.
