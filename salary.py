@@ -1,7 +1,6 @@
 # In salary.py
-
-from db import db
 from sqlalchemy import text
+from db import db
 from datetime import datetime
 
 def calculate_total_earnings(start_date, end_date, hourly_rate):

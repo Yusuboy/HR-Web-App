@@ -14,33 +14,36 @@ Käyttäjä voi kirjautua sisään aloitussivulla antamalla käyttäjätunnuksen
 
 - Uuden käyttäjän rekisteröityminen (User Registration):
 Käyttäjä voi luoda uuden tilin rekisteröitymissivulla antamalla käyttäjätunnuksensa ja salasanansa.
+
 - Työajanseuranta (Time Tracking):
 Käyttäjä voi leimata sisään ja ulos.
-Käyttäjä voi lisätä syyn ulosleimauksen ja sisäänleimauksen yhteydessä.
-
+Käyttäjä voi lisätä syyn sisäänleimaus ja ulosleimauksen yhteydessä.
 - Käyttäjän kotisivu (User Home Page):
-Näytetään käyttäjän kotisivulla tietoja ja mahdollisuus kirjautua sisään, ulos, leimata työaikaa, tehdä lomahakemus ja lisätä syyn leimauksen yhteydessä.
+Näytetään käyttäjän kotisivulla tietoja ja mahdollisuus kirjautua sisään, kirjautua ulos, tehdä lomahakemus ja päästä tarkastelemaan työaika profiiliaan.
 
 - Käyttäjäprofiilisivu (User Profile Page):
-Käyttäjä voi tarkastella työajanhistoriaansa päivämäärän, keston, sisään- ja ulosleimausten aikojen sekä leimauksiin liitettyjen syiden mukaan.
+Käyttäjä voi tarkastella työajanhistoriaansa päivämäärän, keston, sisään- ja ulosleimausten aikojen. Lisäksi näytetään ansaittu palkka.
 
 - Uloskirjautuminen (Logout):
 Käyttäjä voi kirjautua ulos käyttäjän kotisivulla.
 
 - Lomahakemus (Leave Request):
-Käyttäjä voi tehdä lomahakemuksen, ja tämä näkyy käyttäjäprofiilisivulla.
-Käyttäjän lomahakemuket näktvät samalla sivulla ja ne ovat värikoodattuja. Keltainen (pending), vihreä (Approved) ja punainen (rejected).
+Käyttäjä voi tehdä lomahakemuksen, ja tämä näkyy käyttäjäprofiilisivulla. Käyttäjän lomahakemukset näkyvät samalla sivulla ja ne ovat värikoodattuja: Keltainen (pending), vihreä (approved) ja punainen (rejected).
 
 - Navigointi (Navigation):
-käyttäjä voi hinosti navigoida eri sivustojen välillä.
+Käyttäjä voi helposti navigoida eri sivustojen välillä.
 
-- Palkka (Salary)
-Jokaisella työntekijällä on 12/e tuntipalkka.
+- Palkka (Salary):
+Jokaisella työntekijällä on 12 dollarin tuntipalkka.
 
-- Admin/HR - käyttäjä
-Admin käyttäjään voidaan kirjautua. Käyttäjänimi: Admin ja Salasana: 123456
-Admin-kätyttäjä ohjataan dashboard sivustolle kirjatueesaan sisääle. 
-Dasboard sivulla, Admin näkee kaikki lomaanomukset sekä kaikkien työntekijöiden työhistorian. Admin voi, joko hyväksyä ja hylätä lomahakemuksen, joka sitten päivittyy työntekijälle myös. 
+- Admin/HR - käyttäjä:
+Admin-käyttäjään voidaan kirjautua käyttäjänimellä: Admin ja salasanalla: 123456. Admin-käyttäjä ohjataan dashboard-sivustolle kirjauduttuaan sisään. Dashboard-sivulla Admin näkee kaikki loma-anomukset sekä kaikkien työntekijöiden työhistorian. Admin voi hyväksyä tai hylätä lomahakemuksia, ja päätökset päivittyvät myös työntekijöille.
+
+
+
+
+
+
 
 
 ## Testaaminen tuotannossa
