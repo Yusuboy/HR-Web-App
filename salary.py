@@ -1,6 +1,7 @@
+from datetime import datetime
 from sqlalchemy import text
 from db import db
-from datetime import datetime
+
 
 def calculate_total_earnings(start_date, end_date, hourly_rate):
     work_duration_hours = calculate_work_duration_in_hours(start_date, end_date)

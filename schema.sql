@@ -46,14 +46,6 @@ CREATE TABLE IF NOT EXISTS Admin (
 );
 
 
--- -- Define the 'documents' table to store employee documents
--- CREATE TABLE Documents (
---     id SERIAL PRIMARY KEY,
---     user_id INT REFERENCES users(id),
---     document_name VARCHAR(100) NOT NULL,
---     document_url TEXT NOT NULL
--- );
-
 INSERT INTO Admin (username, password) VALUES ('Admin', '123456');
 ALTER TABLE Users ADD COLUMN is_admin BOOLEAN DEFAULT FALSE;
 

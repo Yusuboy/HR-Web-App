@@ -1,8 +1,9 @@
+import secrets
 from sqlalchemy import text
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import session
 from db import db
-import secrets
+
 
 
 
@@ -30,7 +31,7 @@ def new_user(username, password):
 
     if len(password) < 5:
         return "Registration failed. Please choose a password with at least 5 characters."
-    
+
     if len(username) < 5:
         return "Registration failed. Please choose a username with at least 5 characters."
 

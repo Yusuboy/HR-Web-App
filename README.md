@@ -40,6 +40,16 @@ Jokaisella työntekijällä on 12 dollarin tuntipalkka.
 Admin-käyttäjään voidaan kirjautua käyttäjänimellä: Admin ja salasanalla: 123456. Admin-käyttäjä ohjataan dashboard-sivustolle kirjauduttuaan sisään. Dashboard-sivulla Admin näkee kaikki loma-anomukset sekä kaikkien työntekijöiden työhistorian. Admin voi hyväksyä tai hylätä lomahakemuksia, ja päätökset päivittyvät myös työntekijöille.
 
 
+## Kehitysideoita
+
+
+- Nykyisellään admin näkee lomahakemukset ja pystyy niihin vastaamaan. Tulevaisuudessa tavoitteena on mahdollistaa myös lomahakemusten poistaminen adminille vastaamisen jälkeen. Tällä hetkellä admin voi poistaa lomahakemuksia, mutta ne ilmestyvät takaisin sivun päivittämisen yhteydessä.
+
+- Erilaiset tuntipalkat ovat suunnitteilla. Pyhäpäivien palkka voisi olla korkeampi, esimerkiksi tuplapalkka normaalipäiviin verrattuna.
+
+
+- Viestintä Adminin ja työntekijöiden välillä: Nykyisessä versiossa Admin voi vastata työntekijöiden lomahakemuksiin, mutta tulevaisuuden kehityssuunnitelmiin voisi sisältyä tehokkaampi viestintäkanava näiden kahden käyttäjäryhmän välille. 
+
 
 ## SOVELLUS EI OLE SAATAVILLA FLY.IO:SSA
 
