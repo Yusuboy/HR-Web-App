@@ -119,11 +119,15 @@ def get_user_id(username):
 
 
 def get_all_users_work_history():
-    query = text("SELECT u.username, a.check_in, a.check_out, a.checkout_reason, s.hourly_rate, s.total_earnings "
-                 "FROM Users u "
-                 "LEFT JOIN Attendance a ON u.id = a.user_id "
-                 "LEFT JOIN Salaries s ON u.id = s.user_id AND a.check_in::date BETWEEN s.start_date AND COALESCE(s.end_date, CURRENT_DATE) "
-                 "ORDER BY u.username, a.check_in DESC")
+    query = text(
+        "SELECT u.username, a.check_in, a.check_out, a.checkout_reason, "
+        "s.hourly_rate, s.total_earnings "
+        "FROM Users u "
+        "LEFT JOIN Attendance a ON u.id = a.user_id "
+        "LEFT JOIN Salaries s ON u.id = s.user_id AND "
+        "a.check_in::date BETWEEN s.start_date AND COALESCE(s.end_date, CURRENT_DATE) "
+        "ORDER BY u.username, a.check_in DESC"
+    )
 
     result = db.session.execute(query).fetchall()
     return result

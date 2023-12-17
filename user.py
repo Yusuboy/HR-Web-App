@@ -25,12 +25,14 @@ def login(username, password):
 def new_user(username, password):
     if username.isspace() or password.isspace():
         return "Registration failed. Username and password are required for registration."
-    
+
     if len(password) < 5:
         return "Registration failed. Please choose a password with at least 5 characters."
 
 
-    query = text("SELECT id, username, password FROM Users WHERE username=:username UNION SELECT id, username, password FROM Admin WHERE username=:username")
+    query = text("SELECT id, username, password FROM Users"
+                 "WHERE username=:username UNION SELECT id, username, password"
+                 "FROM Admin WHERE username=:username")
 
     existing_user = db.session.execute(query, {"username": username}).first()
 
@@ -39,7 +41,7 @@ def new_user(username, password):
 
     hash_value = generate_password_hash(password)
     query = text("INSERT INTO Users (username, password) VALUES (:username, :password)")
- 
+
     try:
         db.session.execute(query, {"username": username, "password": hash_value})
         db.session.commit()

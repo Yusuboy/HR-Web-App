@@ -10,9 +10,9 @@ from attendance import (
     get_all_users_work_history
 )
 from leave import (
-    create_leave_request, 
-    get_user_leave_requests, 
-    get_all_leave_requests, 
+    create_leave_request,
+    get_user_leave_requests,
+    get_all_leave_requests,
     update_leave_status
 )
 
@@ -111,7 +111,8 @@ def checkout_reason():
         return redirect(url_for('user_home'))
 
 
-    return render_template('checkout_reason.html', title='Checkout Reason',user_id=user_id)
+    return render_template('checkout_reason.html',
+                           title='Checkout Reason',user_id=user_id)
 
 
 @app.route('/profile')
@@ -157,7 +158,9 @@ def leave_request():
         create_leave_request(user_id, start_date, end_date, reason)
         return redirect(url_for('leave_request'))
 
-    return render_template('leave_request.html', title='Leave Request', user_leave_requests=user_leave_requests )
+    return render_template('leave_request.html',
+                           title='Leave Request',
+                           user_leave_requests=user_leave_requests )
 
 
 @app.route('/checkin_confirmation')
@@ -178,21 +181,24 @@ def admin_dashboard():
     # Check if the user is logged in and is an admin
     if 'is_admin' not in session or not session['is_admin']:
         return redirect(url_for('index'))
-    
+
 
     if request.method == 'POST':
         if 'logout' in request.form:
             # Clear the session data and redirect to the login page
             session.clear()
             return redirect(url_for('index'))
-    
+
 
     # Get all leave requests
     leave_requests = get_all_leave_requests()
 
     work_history = get_all_users_work_history()
 
-    return render_template('admin_dashboard.html', title='Admin Dashboard', leave_requests=leave_requests, work_history=work_history)
+    return render_template('admin_dashboard.html',
+                           title='Admin Dashboard',
+                           leave_requests=leave_requests,
+                           work_history=work_history)
 
 
 @app.route('/approve_reject_leave/<int:leave_id>/<action>', methods=['POST'])
@@ -200,7 +206,7 @@ def approve_reject_leave(leave_id, action):
     # Check if the user is logged in and is an admin
     if 'is_admin' not in session or not session['is_admin']:
         return redirect(url_for('index'))
-    
+
     if request.method == 'POST':
         if 'logout' in request.form:
             # Clear the session data and redirect to the login page
@@ -216,15 +222,3 @@ def approve_reject_leave(leave_id, action):
 
     # Redirect back to the admin dashboard
     return redirect(url_for('admin_dashboard'))
-
-
-# @app.route('/work_history', methods=['GET'])
-# def work_history():
-#     # Check if the user is logged in and is an admin
-#     if 'is_admin' not in session or not session['is_admin']:
-#         return redirect(url_for('index'))
-
-#     # Get work history for the specified user
-#     work_history = get_user_work_history()
-
-#     return render_template('work_history.html', title='Employee Work History', work_history=work_history)
