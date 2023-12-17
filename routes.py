@@ -34,6 +34,7 @@ def index():
         if username == 'Admin' and password == '123456':
             # Set a session variable to identify the user as an admin
             session['is_admin'] = True
+            session['csrf_token'] = secrets.token_hex(16)
             return redirect(url_for('admin_dashboard'))
 
         notification = login(username, password)
@@ -81,7 +82,7 @@ def logout():
 def user_home():
     if 'username' not in session:
         # Redirect to the login page or handle unauthorized access
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
 
     username = session['username']
     user_id = get_user_id(username)
@@ -106,7 +107,7 @@ def user_home():
 @app.route('/attendance', methods=['GET', 'POST'])
 def attendance():
     if 'username' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
 
     username = session['username']
     user_id = get_user_id(username)
@@ -128,7 +129,7 @@ def attendance():
 @app.route('/checkout_reason', methods=['GET', 'POST'])
 def checkout_reason():
     if 'username' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
 
     username = session['username']
     user_id = get_user_id(username)
@@ -173,7 +174,7 @@ def user_profile():
 @app.route('/leave_request', methods=['GET', 'POST'])
 def leave_request():
     if 'username' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
 
     username = session['username']
     user_id = get_user_id(username)
