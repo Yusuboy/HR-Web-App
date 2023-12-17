@@ -53,22 +53,27 @@
 
     {% if user_id %}
         <form method="get" action="{{ url_for('attendance') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
             <button type="submit">Stamp in</button>
         </form>
 
         <form method="get" action="{{ url_for('checkout_reason') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
             <button>Stamp out</button>
         </form>
 
         <form method="get" action="{{ url_for('user_profile') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
             <button type="submit">Working time calendar</button>
         </form>
 
         <form method="get" action = "{{ url_for('leave_request') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
             <button type="submit">Leave request</button>
         </form>
 
         <form method="post" action="{{ url_for('user_home') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
             <button type="submit" name="logout">Logout</button>
         </form>
     {% endif %}

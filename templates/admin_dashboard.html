@@ -103,9 +103,11 @@
                     <td>
                         {% if leave_request.status == 'Pending' %}
                             <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='approve') }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                                 <button type="submit">Approve</button>
                             </form>
                             <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='reject') }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                                 <button type="submit">Reject</button>
                             </form>
                             
@@ -150,6 +152,7 @@
 
 
     <form method="post" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <button type="submit" name="logout">Logout</button>
     </form>
 </body>

@@ -65,6 +65,7 @@
     <h1>Choose Checkout Reason</h1>
 
     <form method="post" action="{{ url_for('checkout_reason') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <label for="checkout_reason">Select a reason:</label>
         <select id="checkout_reason" name="checkout_reason">
             <option value="check out">Checkout</option>

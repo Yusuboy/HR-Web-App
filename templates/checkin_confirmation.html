@@ -32,12 +32,12 @@
 <body>
     <h1>Stamped in at {{ attendance.check_in.strftime('%H:%M') }}</h1>
 
-    <form method="post" action="{{ url_for('user_home') }}">
-        <button type="submit">Back to User Home</button>
-    </form>
+    <a href="{{ url_for('user_home') }}">
+        <button>Back to User Home</button>
+    </a>
 
-    <form method="get" action="{{ url_for('checkout_reason') }}">
-        <button type="submit">Stamp out</button>
-    </form>
+    <a href="{{ url_for('checkout_reason') }}">
+        <button>Stamp out</button>
+    </a>
 </body>
 </html>

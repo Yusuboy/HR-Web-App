@@ -96,6 +96,7 @@
     <h1>Leave Request</h1>
 
     <form method="post" action="{{ url_for('leave_request') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <label for="start_date">Start Date:</label>
         <input type="date" id="start_date" name="start_date" required>
 

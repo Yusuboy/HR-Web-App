@@ -2,6 +2,7 @@ from sqlalchemy import text
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import session
 from db import db
+import secrets
 
 
 
@@ -17,6 +18,7 @@ def login(username, password):
 
     hash_value = user.password
     if check_password_hash(hash_value, password):
+        session["csrf_token"] = secrets.token_hex(16)
         session["username"] = username
         return "Login successful!"
     else:
@@ -30,9 +32,9 @@ def new_user(username, password):
         return "Registration failed. Please choose a password with at least 5 characters."
 
 
-    query = text("SELECT id, username, password FROM Users"
-                 "WHERE username=:username UNION SELECT id, username, password"
-                 "FROM Admin WHERE username=:username")
+    query = text("SELECT id, username, password FROM Users "
+                "WHERE username=:username UNION SELECT id, username, password "
+                "FROM Admin WHERE username=:username")
 
     existing_user = db.session.execute(query, {"username": username}).first()
 
@@ -45,6 +47,7 @@ def new_user(username, password):
     try:
         db.session.execute(query, {"username": username, "password": hash_value})
         db.session.commit()
+        session["csrf_token"] = secrets.token_hex(16)
         return "Registration successful! You can now log in."
     except Exception as e:
         print(f"Error creating new user: {e}")
