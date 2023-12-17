@@ -1,67 +1,82 @@
-<!-- Assuming this is in the same template where you applied the previous styles -->
-<style>
-    h2 {
-        color: #333;
-        margin-bottom: 20px;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - HR-Web-App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-    th {
-        background-color: #f2f2f2;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
 
-    tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
 
-    a {
-        color: #007bff;
-        text-decoration: none;
-        margin-left: 10px;
-        display: inline-block;
-        margin-top: 10px;
-    }
-</style>
-<title>Profile</title>
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-<h2>{{ username }}'s Profile</h2>
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
-<table>
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Day</th>
-            <th>Hours</th>
-            <th>Minutes</th>
-            <th>Check-in</th>
-            <th>Check-out</th>
-            <th>Earnings/Hour</th>
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
 
-        </tr>
-    </thead>
-    <tbody>
-        {% for record in attendance_history %}
+<body>
+    <h2>{{ username }}'s Profile</h2>
+
+    <table>
+        <thead>
             <tr>
-                <td>{{ record.date }}</td>
-                <td>{{ record.day_of_week }}</td>
-                <td>{{ record.work_duration.seconds // 3600 }}</td>
-                <td>{{ (record.work_duration.seconds // 60) % 60 }}</td>
-                <td>{{ record.check_in_time }}</td>
-                <td>{{ record.check_out_time }}</td>
-                <td>{{ record.total_earnings }}</td>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Hours</th>
+                <th>Minutes</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Earnings/Hour</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<a href="{{ url_for('user_home') }}">Go back</a>
+        </thead>
+        <tbody>
+            {% for record in attendance_history %}
+                <tr>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.day_of_week }}</td>
+                    <td>{{ record.work_duration.seconds // 3600 }}</td>
+                    <td>{{ (record.work_duration.seconds // 60) % 60 }}</td>
+                    <td>{{ record.check_in_time }}</td>
+                    <td>{{ record.check_out_time }}</td>
+                    <td>{{ record.total_earnings }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('user_home') }}">Go back</a>
+</body>
+
+</html>

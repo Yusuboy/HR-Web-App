@@ -1,53 +1,59 @@
-<!-- Assuming this is in the same template where you applied the previous styles -->
-<style>
-    /* Styles for form elements */
-    form {
-        margin-top: 20px;
-        text-align: left;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance</title>
+    <style>
+        /* Styles for form elements */
+        form {
+            margin-top: 20px;
+            text-align: left;
+        }
 
-    label {
-        display: block;
-        margin-bottom: 5px;
-        color: #333;
-    }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
 
+        input[type="submit"],
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
 
-    input[type="submit"],
-    button {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #0056b3;
+        }
 
-    select {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
 
-    }
-
-    a {
-        color: #007bff;
-        text-decoration: none;
-        display: block;
-        margin-top: 10px;
-    }
-
-
-
-
-
-    /* Add other styles as needed */
-</style>
-<title>Attendance</title>
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
 
 <form method="post" action="{{ url_for('attendance') }}">
     <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
@@ -64,7 +70,7 @@
     <!-- Dropdown for Tuntilaji -->
     <label for="tuntilaji">Hour class:</label>
     <select id="tuntilaji" name="tuntilaji">
-        <option value="työaika">working hours</option>
+        <option value="työaika">Working hours</option>
         <option value="matka-aika">Travel time</option>
         <option value="kokous">Meeting</option>
     </select>
@@ -77,3 +83,5 @@
 </form>
 
 <a href="{{ url_for('user_home') }}">Go back</a>
+</body>
+</html>

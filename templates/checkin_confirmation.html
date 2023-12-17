@@ -1,33 +1,47 @@
-<!-- Assuming this is in the same template where you applied the previous styles -->
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 20px;
-        text-align: center;
-    }
-
-    h1 {
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    button {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-</style>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check-in Confirmation - HR-Web-App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: block; /* Set buttons as block-level elements */
+            width: 200px; /* Make buttons full width */
+            margin: 0 auto; /* Center the button horizontally */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: block; /* Set anchor elements as block-level elements */
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Stamped in at {{ attendance.check_in.strftime('%H:%M') }}</h1>

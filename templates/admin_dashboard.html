@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <script>
+        function removeLeaveRequest(leaveRequestId) {
+            // Assuming each leave request row has a unique ID, hide the corresponding row
+            var row = document.getElementById(leaveRequestId);
+            row.style.display = 'none';
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - HR-Web-App</title>
@@ -11,8 +19,8 @@
             text-align: center;
         }
 
-        h1,h2 {
-            color: #333;
+        h1, h2 {
+            color: #007bff;
             margin-bottom: 20px;
         }
 
@@ -38,8 +46,8 @@
         }
 
         button {
-            background-color: transparent;
-            color: #007bff;
+            background-color: #007bff;
+            color: #fff;
             padding: 8px 12px;
             border: 2px solid #007bff;
             border-radius: 5px;
@@ -48,8 +56,7 @@
         }
 
         button:hover {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #0056b3;
         }
 
         form {
@@ -70,14 +77,14 @@
         }
 
         .work-history-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
         .work-history-table th, .work-history-table td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 10px;
             text-align: left;
         }
 
@@ -91,16 +98,10 @@
             background-color: #f7f7f7;
             height: 1px;
         }
-        
+
     </style>
-    <script>
-        function removeLeaveRequest(leaveRequestId) {
-            // Assuming each leave request row has a unique ID, hide the corresponding row
-            var row = document.getElementById(leaveRequestId);
-            row.style.display = 'none';
-        }
-    </script>
 </head>
+
 <body>
     <h1>Admin Dashboard</h1>
 
@@ -117,37 +118,36 @@
         </thead>
         <tbody>
             {% for leave_request in leave_requests %}
+            <tr id="{{ leave_request.id }}">
+                <td>{{ leave_request.username }}</td>
+                <td>{{ leave_request.start_date }}</td>
+                <td>{{ leave_request.end_date }}</td>
+                <td>{{ leave_request.reason }}</td>
+                <td>{{ leave_request.status }}</td>
+                <td>
+                    {% if leave_request.status == 'Pending' %}
+                    <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='approve') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                        <button type="submit">Approve</button>
+                    </form>
+                    <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='reject') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                        <button type="submit">Reject</button>
+                    </form>
 
-                <tr id="{{ leave_request.id }}">
-                    <td>{{ leave_request.username }}</td>
-                    <td>{{ leave_request.start_date }}</td>
-                    <td>{{ leave_request.end_date }}</td>
-                    <td>{{ leave_request.reason }}</td>
-                    <td>{{ leave_request.status }}</td>
-                    <td>
-                        {% if leave_request.status == 'Pending' %}
-                            <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='approve') }}">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-                                <button type="submit">Approve</button>
-                            </form>
-                            <form method="post" action="{{ url_for('approve_reject_leave', leave_id=leave_request.id, action='reject') }}">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-                                <button type="submit">Reject</button>
-                            </form>
-                            
-                        {% else %}
-                            <!-- Display some message or disable the buttons for requests with other statuses -->
-                            
-                            Request has been {{ leave_request.status }}
-                            <button type="button" onclick="removeLeaveRequest('{{ leave_request.id }}')">Remove</button>
-                        {% endif %}
-                    </td>
-                </tr>
+                    {% else %}
+                    <!-- Display some message or disable the buttons for requests with other statuses -->
+
+                    Request has been {{ leave_request.status }}
+                    <button type="button" onclick="removeLeaveRequest('{{ leave_request.id }}')">Remove</button>
+                    {% endif %}
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h1>Employees Work History</h1>
+    <h2>Employees Work History</h2>
 
     <table class="work-history-table">
         <thead>
@@ -162,38 +162,38 @@
         <tbody>
             {% set current_date = None %}
             {% for record in work_history %}
-                <tr>
-                    {% if record.check_in %}
-                        {% if record.check_in.date() != current_date %}
-                            <td>{{ record.check_in.strftime('%Y-%m-%d') }}</td>
-                            {% set current_date = record.check_in.date() %}
-                        {% else %}
-                            <td></td>
-                        {% endif %}
-                        <td>{{ record.username }}</td>
-                        <td>
-                            <strong>Stamp In:</strong> {{ record.check_in.strftime('%Y-%m-%d %H:%M') }}<br>
-                            <strong>Stamp Out:</strong> {% if record.check_out %}{{ record.check_out.strftime('%Y-%m-%d %H:%M') }}{% else %}N/A{% endif %}<br>
-                            <strong>Reason:</strong> {% if record.checkout_reason %}{{ record.checkout_reason }}{% else %}N/A{% endif %}
-                        </td>
-                        <td>{{ record.hourly_rate if record.hourly_rate else 'N/A' }}</td>
-                        <td>{{ record.total_earnings if record.total_earnings else 'N/A' }}</td>
-                    {% else %}
-                        <td>N/A</td>
-                        <td>{{ record.username }}</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
-                    {% endif %}
-                </tr>
+            <tr>
+                {% if record.check_in %}
+                {% if record.check_in.date() != current_date %}
+                <td>{{ record.check_in.strftime('%Y-%m-%d') }}</td>
+                {% set current_date = record.check_in.date() %}
+                {% else %}
+                <td></td>
+                {% endif %}
+                <td>{{ record.username }}</td>
+                <td>
+                    <strong>Stamp In:</strong> {{ record.check_in.strftime('%Y-%m-%d %H:%M') }}<br>
+                    <strong>Stamp Out:</strong> {% if record.check_out %}{{ record.check_out.strftime('%Y-%m-%d %H:%M') }}{% else %}N/A{% endif %}<br>
+                    <strong>Reason:</strong> {% if record.checkout_reason %}{{ record.checkout_reason }}{% else %}N/A{% endif %}
+                </td>
+                <td>{{ record.hourly_rate if record.hourly_rate else 'N/A' }}</td>
+                <td>{{ record.total_earnings if record.total_earnings else 'N/A' }}</td>
+                {% else %}
+                <td>N/A</td>
+                <td>{{ record.username }}</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                {% endif %}
+            </tr>
             {% endfor %}
         </tbody>
     </table>
-    
+
     <form method="post" action="{{ url_for('logout') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <button type="submit" name="logout">Logout</button>
     </form>
-    </body>
-    </html>
-    
+</body>
+
+</html>
